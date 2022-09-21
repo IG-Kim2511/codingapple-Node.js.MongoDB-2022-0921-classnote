@@ -3,6 +3,9 @@ const app = express();
 
 var colors = require("colors");
 
+var bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+
 
 // 🍀get, post, put, delete
 
@@ -22,9 +25,12 @@ app.get("/write", function (req, res) {
   });
 
 
-// 🍀post
+// 🍀post, bodyParser
 app.post('/add',function (req,res) {    
     res.send('/add, 전송완료')
+
+    console.log(req.body)
+    console.log(req.body.ig_title)
 })
 
 
