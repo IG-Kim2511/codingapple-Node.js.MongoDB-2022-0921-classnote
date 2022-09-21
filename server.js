@@ -5,7 +5,8 @@ var colors = require('colors');
 
 
 app.get('/', function (req, res) {
-  res.send('ig node server')
+//   res.send('ig node server')
+    res.sendFile(__dirname +'/index.html');
 })
 
 
