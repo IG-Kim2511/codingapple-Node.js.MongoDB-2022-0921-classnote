@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 
-var colors = require("colors");
+let colors = require("colors");
 
-var bodyParser = require('body-parser')
+let bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
+
+let MongoClient = require('mongodb').MongoClient;
+
+require('dotenv').config()
 
 
 // 🍀get, post, put, delete
@@ -34,16 +38,26 @@ app.post('/add',function (req,res) {
 })
 
 
+// 🦄🦄c28 
 
+let url = process.env.mongoDB_url;
 
+MongoClient.connect(url, function(err, client) {
+  if (err) throw err;
+  console.log("ig-Database created!");
 
-
-
-
-
-
-
+  
 // 🍀listen
-app.listen(3000, function () {
-  console.log("ig node server gogo".rainbow);
+app.listen(process.env.PORT, function () {
+    console.log("ig node server gogo".rainbow);
+  });
+  
+
+
+  client.close();
 });
+
+
+
+
+
