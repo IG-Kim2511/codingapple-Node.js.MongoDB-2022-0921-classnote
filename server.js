@@ -99,11 +99,7 @@ MongoClient.connect(url, function(err, client) {
 
     req.body._id = parseInt(req.body._id);
     db.collection('co0921').deleteOne(req.body, function (pp_err, pp_res) {
-      if (pp_err) {        
-        console.log(pp_err)
-      }
-
-      console.log('ig delete fin')
+         console.log('ig delete fin')
 
       res.status(200).send({message:"ig delete fail"});
     })

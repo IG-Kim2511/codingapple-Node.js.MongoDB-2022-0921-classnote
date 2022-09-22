@@ -94,18 +94,16 @@
             data: {_id: e.target.dataset.id}
             
           }).done(function() {
-
             
             $(this).parent('div').fadeOut();
+            location.reload();
           
-            console.log('ig delete success')
-          }).fail(function () {
-            
+            console.log('ig delete success - list.js')
+          }).fail(function (jqXHR, textStatus) {                  //🥒c46-40)
+
+          console.log('c44, delete-fail')
+          console.log( "Request failed: " + textStatus );   
           });
-
-
-
-
       });
 
 
