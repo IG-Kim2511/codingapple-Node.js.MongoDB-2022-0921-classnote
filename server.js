@@ -10,6 +10,8 @@ require('dotenv').config()
 
 let MongoClient = require('mongodb').MongoClient;
 
+app.set('view engine','ejs')
+
 
 
 // 🍀get, post, put, delete
@@ -42,14 +44,7 @@ MongoClient.connect(url, function(err, client) {
   console.log("ig-Database created!");
 
 
-  
-  let db = client.db('db0921');
-  db.collection('co0921').insertOne({title:'hi',data:1, name:'john,'},function (err, p_res) {
-    console.log('insertone success')
-    
-  })  
-
-
+  let db = client.db('db0921')
 
   // 🍀post, bodyParser
   app.post('/add',function (req,res) {    
@@ -58,12 +53,24 @@ MongoClient.connect(url, function(err, client) {
     console.log(req.body)
     console.log(req.body.ig_title)
 
+    // 🍀insertOne
     db.collection('co0921').insertOne({title: req.body.ig_title, date:req.body.ig_data },function (){
-      console.log('insertone success'.blue)
-      
+      console.log('insertone success'.blue)      
     })
   })
   
+  app.get("/list", function (req, res) {
+
+    db.collection('co0921').find().toArray(function (err,pp_res) {
+      console.log(pp_res)
+      
+    })
+
+    //res.render
+    res.render('list.ejs');
+  });
+
+
 
   // 🍀listen
   app.listen(process.env.PORT, function () {
