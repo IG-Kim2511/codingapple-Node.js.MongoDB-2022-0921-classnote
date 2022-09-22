@@ -185,6 +185,19 @@ body {
     color: orange;
   }
   
+
+
+
+
+/*  */
+.title-page{
+  background: lightblue;
+  
+}
+
+
+
+  /* responsive */
   @media screen and (max-width: 768px) {
     .navbar {
       flex-direction: column;
