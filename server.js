@@ -64,10 +64,10 @@ MongoClient.connect(url, function(err, client) {
     db.collection('co0921').find().toArray(function (err,pp_res) {
       console.log(pp_res)
       
+      //res.render
+      res.render('list.ejs',{ig_posts:pp_res});
     })
 
-    //res.render
-    res.render('list.ejs');
   });
 
 
