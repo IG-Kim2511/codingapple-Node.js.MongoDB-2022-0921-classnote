@@ -74,7 +74,11 @@
                 
               <!-- 🍀c42 -->
               <button class="myBtn delete" data-id="<%= ig_posts[i]._id %>">Delete</button>
-              <button class="myBtn detail  data-id="<%= ig_posts[i]._id %>">Detail page</button>
+
+               <!-- 🍀c48 href="http://localhost:3000/detail/<%= ig_posts[i]._id %>"-->
+               
+              <a class="myBtn detail"  data-id="<%= ig_posts[i]._id %>" href="http://localhost:3000/detail/<%= ig_posts[i]._id %>">Detail page</a>
+              
             </div>
           <%  }  %>  
      
@@ -104,6 +108,10 @@
           console.log('c44, delete-fail')
           console.log( "Request failed: " + textStatus );   
           });
+      });
+
+      $('.detail').click((e)=>{
+
       });
 
 
