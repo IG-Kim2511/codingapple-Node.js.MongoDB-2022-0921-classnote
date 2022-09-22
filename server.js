@@ -54,10 +54,27 @@ MongoClient.connect(url, function(err, client) {
     console.log(req.body)
     console.log(req.body.ig_title)
 
-    // 🍀insertOne
-    db.collection('co0921').insertOne({title: req.body.ig_title, date:req.body.ig_data },function (){
-      console.log('insertone success'.blue)      
-    })
+
+
+    // 🍀c38.findOne, total count
+    db.collection('counter').findOne({name:'total post count'},function (err,pp_res) {
+      console.log(pp_res)
+      console.log(pp_res.totalPost)
+      
+        // 🍀insertOne, _id: pp_res.totalPost+1
+      db.collection('co0921').insertOne({_id:pp_res.totalPost+1,title: req.body.ig_title, date:req.body.ig_data },function (){
+        console.log('insertone success'.blue)      
+
+        // 🍀c40.updateOne, $inc:{totalPost:1}
+        db.collection('counter').updateOne({name:'total post count'},{$inc:{totalPost:1}},function (PPP_err,ppp_res) {
+          if (PPP_err) {
+            return console.log(PPP_err)            
+          } 
+          
+        });
+      })
+    });
+
   })
   
   app.get("/list", function (req, res) {
