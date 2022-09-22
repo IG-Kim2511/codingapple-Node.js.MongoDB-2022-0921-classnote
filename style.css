@@ -126,6 +126,34 @@ body {
     color: var(--color-black);
     margin: 4px 0;
   }
+
+  
+  .myBtn {
+    box-shadow: 0px 1px 0px 0px #f0f7fa;
+    background: linear-gradient(to bottom, lightseagreen 5%, green 100%);
+    background-color: lightseagreen;
+    color: #ffffff;
+    
+    border-radius: 6px;
+    border: 1px solid green;
+    display: inline-block;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 3px 24px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #5b6178;
+  }
+  .myBtn:hover {
+    background: linear-gradient(to bottom, green 5%, lightseagreen 100%);
+    background-color: green;
+  }
+  .myBtn:active {
+    position: relative;
+    top: 1px;
+  }
+
   
   /*[Navbar] 드림코딩에서 만든 navbar가져옴 */
   
@@ -192,8 +220,16 @@ body {
 /*  */
 .title-page{
   background: lightblue;
-  
+
 }
+
+
+  /* list.ejs */
+  .list{
+    border: 1px solid gray;
+    padding: 5px;
+    margin: 5px;
+  }
 
 
 
