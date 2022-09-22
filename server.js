@@ -17,6 +17,11 @@ let MongoClient = require('mongodb').MongoClient;
 // ejs
 app.set('view engine','ejs')
 
+// c50) static 파일 보관위해 public폴더 씀. html에서 경로설정할 때 root폴더에 보관된 것처럼 경로 설정함
+app.use(express.static('public'))
+
+
+
 
 // 🍀get, post, put, delete
 
