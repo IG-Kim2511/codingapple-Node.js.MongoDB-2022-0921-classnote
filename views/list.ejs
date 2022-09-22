@@ -68,16 +68,50 @@
           
           <%    for (let i = 0; i < ig_posts.length; i++) {   %>  
             <div class="list">
+              <h2>id: <%= ig_posts[i]._id %></h2>
               <h2>할일 제목 : <%= ig_posts[i].title %></h2>
               <p>할일 마감날짜 : <%= ig_posts[i].date %></p> 
                 
-                    <!-- 🍀c42 -->
-              <button class="myBtn delete">Delete</button>
+              <!-- 🍀c42 -->
+              <button class="myBtn delete" data-id="<%= ig_posts[i]._id %>">Delete</button>
               <button class="myBtn detail">Detail page</button>
             </div>
           <%  }  %>  
      
       
       </section>
+
+    <!-- 🦄🦄c42,44,46, AJAX로 DELETE 요청하기 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+      $('.delete').click((e)=>{           
+
+          // 🍀44
+          $.ajax({
+            method: "DELETE",
+            url: "/delete",
+            data: {_id: e.target.dataset.id}
+            
+          }).done(function() {
+
+            
+            $(this).parent('div').fadeOut();
+          
+            console.log('ig delete success')
+          }).fail(function () {
+            
+          });
+
+
+
+
+      });
+
+
+
+    </script>
+
+
 </body>
 </html>

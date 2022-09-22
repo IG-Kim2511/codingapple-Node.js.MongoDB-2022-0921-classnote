@@ -48,11 +48,12 @@ MongoClient.connect(url, function(err, client) {
 
   // 🍀post, bodyParser
   app.post('/add',function (req,res) {    
-    res.send('/add, 전송완료')
+    // res.send('/add, 전송완료')
+    res.sendFile(__dirname + "/write.html");
+    console.log('add fin')
 
     console.log(req.body)
     console.log(req.body.ig_title)
-
 
 
     // 🍀c38.findOne, total count
@@ -76,6 +77,7 @@ MongoClient.connect(url, function(err, client) {
 
   })
   
+  // list
   app.get("/list", function (req, res) {
 
     // find().toArray()
@@ -87,6 +89,25 @@ MongoClient.connect(url, function(err, client) {
       res.render('list.ejs',{ig_posts:pp_res});
     })
 
+  });
+
+
+  // 🍀c42, delete
+  app.delete('/delete', function (req,res) {
+    
+    console.log(req.body)
+
+    req.body._id = parseInt(req.body._id);
+    db.collection('co0921').deleteOne(req.body, function (pp_err, pp_res) {
+      if (pp_err) {        
+        console.log(pp_err)
+      }
+
+      console.log('ig delete fin')
+
+      res.status(200).send({message:"ig delete fail"});
+    })
+    
   });
 
 
