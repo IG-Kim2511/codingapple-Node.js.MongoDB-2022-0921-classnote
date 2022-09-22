@@ -1,17 +1,21 @@
 const express = require("express");
 const app = express();
 
+// colors
 let colors = require("colors");
 
+//bodyParser 
 let bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 
+// dotenv
 require('dotenv').config()
 
+// mogoClient
 let MongoClient = require('mongodb').MongoClient;
 
+// ejs
 app.set('view engine','ejs')
-
 
 
 // 🍀get, post, put, delete
@@ -29,13 +33,10 @@ app.get("/style.css", function (req, res) {
 app.get("/write", function (req, res) {
     //res.send('ig node server')
     res.sendFile(__dirname + "/write.html");
-  });
+});
 
 
-
-
-
-// 🦄🦄c28 
+  // 🦄🦄c28 
 
 let url = process.env.mongoDB_url;
 
@@ -61,15 +62,16 @@ MongoClient.connect(url, function(err, client) {
   
   app.get("/list", function (req, res) {
 
+    // find().toArray()
     db.collection('co0921').find().toArray(function (err,pp_res) {
       console.log(pp_res)
       
+      // ejs
       //res.render
       res.render('list.ejs',{ig_posts:pp_res});
     })
 
   });
-
 
 
   // 🍀listen
