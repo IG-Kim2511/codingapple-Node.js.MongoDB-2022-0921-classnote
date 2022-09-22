@@ -107,11 +107,54 @@ MongoClient.connect(url, function(err, client) {
   });
 
 
+
+  // 🍀c48. 👉/views/detail.ejs
+
+  app.get('/detail/:id',function (req,res) {
+    
+
+    db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (err,p_res) {
+      console.log(p_res)
+
+      res.render('detail.ejs',{ig_data: p_res})
+      
+    });
+
+
+
+
+    
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // 🍀listen
   app.listen(process.env.PORT, function () {
       console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
   });
-
 
   // cliend.close()있으면 post가 안됨..왜인지는 모름
   // client.close();
