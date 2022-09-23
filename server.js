@@ -28,7 +28,12 @@ app.use(express.static('public'))
 // 🍀get
 app.get("/", function (req, res) {
   //res.send('ig node server')
-  res.sendFile(__dirname + "/index.html");
+  
+  // html
+  // res.sendFile(__dirname + "/index.html");
+
+  // ejs, html과 달리 render(~) 라는거 헷갈리지 말기
+  res.render('index.ejs')
 });
 
 app.get("/style.css", function (req, res) {
