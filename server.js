@@ -22,8 +22,6 @@ app.set('view engine','ejs')
 app.use(express.static('public'))
 
 
-
-
 // 🍀get, post, put, delete
 
 // 🍀get
