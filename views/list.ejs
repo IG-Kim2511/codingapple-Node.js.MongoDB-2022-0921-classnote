@@ -8,46 +8,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>       
-    <section>
-        <p class="title">터미널 명령어 정리</p>
-        <!-- 
-         
-         -->
-      </section>
-      <section class="c3">
-        <p class="title"></p>
-      </section>
-  
-      <!-- 🦄🦄c22 Bootstrap을 이용한 빠른 UI 개발 -->
-  
-      <!--[Navbar] 드림코딩에서 만든 navbar가져옴-->
-      <nav class="navbar">
-        <div class="navbar__logo">
-          <i class="fas fa-kiwi-bird"></i>
-          <a href="">iglooKim 2022-0920 </a>
-        </div>
-        <div class="navbar__menu">
-          
-          <!-- href="http://localhost:3000/write" -->
-          <li><a href="http://localhost:3000">home</a></li>
-          <li><a href="http://localhost:3000/write">write</a></li>
-          <li><a href="http://localhost:3000/list">list</a></li>
-          <li><a href="/edit">edit</a></li>
-          
-        </div>
-        <div class="navbar__icons">
-          <li><i class="fab fa-odnoklassniki-square"></i></li>
-          <li><i class="fas fa-skiing"></i></li>
-        </div>
-  
-        <a href="#" class="footer">
-          <i class="fas fa-align-justify"></i>
-        </a>
-      </nav>
-         
-      <section>
-        <h1 class="title-page">./views/list.ejs</h1>
-      </section>
+
+    <!-- 🍀c50 include, 
+      ejs include는 comment에 있는 코드도 읽어버림. 
+      조심하자
+    -->
+    <%- include('./nav_c50.html') %>  
+   
+    <h1 class="title-page">./views/list.ejs</h1>
+
       <br><br>
       
       <!--  -->

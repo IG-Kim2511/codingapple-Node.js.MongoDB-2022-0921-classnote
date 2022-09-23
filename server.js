@@ -33,7 +33,8 @@ app.get("/", function (req, res) {
   // html
   // res.sendFile(__dirname + "/index.html");
 
-  // ejs, html과 달리 render(~) 라는거 헷갈리지 말기
+  //🦄c50. ejs : html과 달리 render(~) 라는거 헷갈리지 말기
+  // 👉index.ejs
   res.render('index.ejs')
 
 });
@@ -44,7 +45,9 @@ app.get("/style.css", function (req, res) {
 
 app.get("/write", function (req, res) {
     //res.send('ig node server')
-    res.sendFile(__dirname + "/write.html");
+    // res.sendFile(__dirname + "/write.html");
+
+    res.render('write.ejs')
 });
 
 
