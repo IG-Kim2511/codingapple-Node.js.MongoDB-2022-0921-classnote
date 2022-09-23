@@ -16,6 +16,7 @@ let MongoClient = require('mongodb').MongoClient;
 
 // ejs
 app.set('view engine','ejs')
+// let ejs = require('ejs');
 
 // c50) static 파일 보관위해 public폴더 씀. html에서 경로설정할 때 root폴더에 보관된 것처럼 경로 설정함
 app.use(express.static('public'))
@@ -28,7 +29,13 @@ app.use(express.static('public'))
 // 🍀get
 app.get("/", function (req, res) {
   //res.send('ig node server')
+  
+  // html
   res.sendFile(__dirname + "/index.html");
+
+  // ejs, html과 달리 render(~) 라는거 헷갈리지 말기
+  // res.render('index.ejs')
+
 });
 
 app.get("/style.css", function (req, res) {
