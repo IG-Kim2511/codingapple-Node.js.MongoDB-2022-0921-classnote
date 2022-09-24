@@ -130,7 +130,12 @@ MongoClient.connect(url, function(err, client) {
     });    
   });
 
-  // 🦄🦄c52
+  // 🦄🦄c52. 👉edit.ejs, 👉edit-id.ejs
+  /* 
+    1 'edit' - 'edit-id'페이지 따로만듬
+    2. app.get()도 따로 만듬
+    에러없이 정상작동됨
+  */
   app.get("/edit", function (req, res) {
     res.render('edit.ejs')
   });
