@@ -48,13 +48,8 @@ app.get("/write", function (req, res) {
     res.render('write.ejs')
 });
 
-// 🦄🦄c52
-app.get("/edit", function (req, res) {
-    res.render('edit.ejs')
-});
 
-
-  // 🦄🦄c28 
+// 🦄🦄c28 
 
 let url = process.env.mongoDB_url;
 
@@ -129,20 +124,28 @@ MongoClient.connect(url, function(err, client) {
   // 🍀c48. 👉/views/detail.ejs
 
   app.get('/detail/:id',function (req,res) {
-    
-
     db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (err,p_res) {
       console.log(p_res)
-
-      res.render('detail.ejs',{ig_data: p_res})
-      
-    });
-
-
-
-
-    
+      res.render('detail.ejs',{ig_data: p_res})      
+    });    
   });
+
+  // 🦄🦄c52
+  app.get("/edit", function (req, res) {
+    res.render('edit.ejs')
+  });
+
+  // 🍀 /edit/:id
+  app.get("/edit/:id", function (req, res) {
+    db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (err, p_db결과) {    
+      if (err) {
+        console.log(err)
+      }  
+      console.log(p_db결과)
+      res.render('edit.ejs',{ig_post: p_db결과})      
+    })
+  });
+
 
 
 
