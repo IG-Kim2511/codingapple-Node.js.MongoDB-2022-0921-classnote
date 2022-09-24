@@ -124,7 +124,7 @@ MongoClient.connect(url, function(err, client) {
   // 🍀c48. 👉/views/detail.ejs
 
   app.get('/detail/:id',function (req,res) {
-    db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (err,p_res) {
+    db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err,p_res) {
       console.log(p_res)
       res.render('detail.ejs',{ig_data: p_res})      
     });    
@@ -137,10 +137,8 @@ MongoClient.connect(url, function(err, client) {
 
   // 🍀 /edit/:id
   app.get("/edit/:id", function (req, res) {
-    db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (err, p_db결과) {    
-      if (err) {
-        console.log(err)
-      }  
+    db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err, p_db결과) {    
+        
       console.log(p_db결과)
       res.render('edit.ejs',{ig_post: p_db결과})      
     })
