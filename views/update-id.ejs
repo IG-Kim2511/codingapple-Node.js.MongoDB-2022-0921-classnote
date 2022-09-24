@@ -13,6 +13,7 @@
     <%- include('./nav_c50.html') %>
     <h1 class="title-page">/views/update-id.ejs  </h1>
 
+    <h4>id: <%= ig_post._id %> </h4>
     <h4>Title: <%= ig_post.title %> </h4>
     <h4>Date:  <%= ig_post.date %></h4>
 
@@ -22,26 +23,33 @@
       <!-- 🦄c54 -->
       <!--  🍀method="POST" action="/resource?_method=PUT" -->
       <!--  🍀method="POST" action="/resource?_method=DELETE" -->
-      <form  method="POST" action="/update?_method=PUT">
-        
-        <div class="form-group">
-           <!-- input 추가 (몰래 id정보도  같이 보내기위해..) -->
-           <label>_id정보..몰래 보냄 </label>
-           <input type="text" name="id" value="<%= ig_post._id %>" style="display: none;"/>
 
-           <br>
-          <label>오늘의 할일: </label>   
-          <!-- value  -->
-          <input type="text" class="form-control" name="ig_title" value="<%= ig_post.title %>"/>
 
-          <br>
-          <label>날짜: </label>
-          <!-- value -->
-          <input type="text" class="form-control" name="ig_data" value="<%= ig_post.date %>"/>
-        </div>
-   
-        <button type="submit" class="myBtn btn-outline-secondary">Submit</button>
-      </form>
+         <form  method="POST" action="/update-id?_method=PUT">
+          
+            <div class="form-group">
+              <!-- input 추가 (몰래 id정보도  같이 보내기위해..) -->
+              <label>_id정보..몰래 보냄, style="display: none;" 추가 </label>
+              <input type="text" name="ig_id" value="<%= ig_post._id %>" />
+
+              <br>
+              <label>오늘의 할일: </label>   
+              <!-- value  -->
+              <input type="text" name="ig_title" value="<%= ig_post.title %>"/>
+
+              <br>
+              <label>날짜: </label>
+              <!-- value -->
+              <input type="text" name="ig_date" value="<%= ig_post.date %>"/>
+            </div>
+      
+            <button type="submit" class="myBtn">Submit</button>
+        </form>
+
+
+
+
+      
     </div>
     
 </body>

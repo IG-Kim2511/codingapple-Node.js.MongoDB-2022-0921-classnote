@@ -165,12 +165,14 @@ MongoClient.connect(url, function(err, client) {
 
   // 🦄🦄🦄c54, 👉update-id.ejs
 
-  app.put('/update',function (req,res) {
+  app.put('/update-id',function (req,res) {
+
+    console.log(res.body)
     
-    db.collection('co0921').updateOne({_id:parseInt(req.body.id)},{$set:{title: req.body.title, date: req.body.date}},function (p_err, p_res) {
+    db.collection('co0921').updateOne({_id:parseInt(req.body.ig_id)},{$set:{title: req.body.ig_title, date: req.body.ig_data}},function (p_err, p_res) {
       console.log('ig- update- fin')
 
-      res.redirect('/list');
+      // res.redirect('/list');
     })
   });
 
