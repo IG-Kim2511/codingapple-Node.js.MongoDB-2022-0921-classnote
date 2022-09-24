@@ -21,6 +21,16 @@ app.set('view engine','ejs')
 // c50) static 파일 보관위해 public폴더 씀. html에서 경로설정할 때 root폴더에 보관된 것처럼 경로 설정함
 app.use(express.static('public'))
 
+// method-override
+let methodOverride = require('method-override')
+app.use(methodOverride('X-HTTP-Method-Override'))
+
+
+
+
+
+
+
 
 // 🍀get, post, put, delete
 
@@ -65,7 +75,7 @@ MongoClient.connect(url, function(err, client) {
     // res.sendFile(__dirname + "/write.html");
     res.render('write.ejs')
 
-    
+
     console.log('add fin')
 
     console.log(req.body)
@@ -152,6 +162,17 @@ MongoClient.connect(url, function(err, client) {
     })
   });
 
+
+  // 🦄🦄🦄c54, 👉update-id.ejs
+
+  app.put('/update',function (req,res) {
+    
+    db.collection('co0921').updateOne({_id:parseInt(req.body.id)},{$set:{title: req.body.title, date: req.body.date}},function (p_err, p_res) {
+      console.log('ig- update- fin')
+
+      res.redirect('/list');
+    })
+  });
 
 
 

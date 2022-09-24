@@ -19,21 +19,27 @@
 
     <div class="container mt-3">
 
-      <!-- action="/add" method="POST" -->
-      <form action="/add" method="POST">
-
-
+      <!-- 🦄c54 -->
+      <!--  🍀method="POST" action="/resource?_method=PUT" -->
+      <!--  🍀method="POST" action="/resource?_method=DELETE" -->
+      <form  method="POST" action="/update?_method=PUT">
+        
         <div class="form-group">
-          <label>오늘의 할일</label>
+           <!-- input 추가 (몰래 id정보도  같이 보내기위해..) -->
+           <label>_id정보..몰래 보냄 </label>
+           <input type="text" name="id" value="<%= ig_post._id %>" style="display: none;"/>
 
-          <input type="text" class="form-control" name="ig_title" value=" <%= ig_post.title %>"/>
-        </div>
-        <div class="form-group">
-          <label>날짜</label>
+           <br>
+          <label>오늘의 할일: </label>   
+          <!-- value  -->
+          <input type="text" class="form-control" name="ig_title" value="<%= ig_post.title %>"/>
 
-    
-          <input type="text" class="form-control" name="ig_data" value=" <%= ig_post.date %>"/>
+          <br>
+          <label>날짜: </label>
+          <!-- value -->
+          <input type="text" class="form-control" name="ig_data" value="<%= ig_post.date %>"/>
         </div>
+   
         <button type="submit" class="myBtn btn-outline-secondary">Submit</button>
       </form>
     </div>
