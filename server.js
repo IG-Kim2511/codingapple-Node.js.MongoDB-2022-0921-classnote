@@ -62,7 +62,10 @@ MongoClient.connect(url, function(err, client) {
   // 🍀post, bodyParser
   app.post('/add',function (req,res) {    
     // res.send('/add, 전송완료')
-    res.sendFile(__dirname + "/write.html");
+    // res.sendFile(__dirname + "/write.html");
+    res.render('write.ejs')
+
+    
     console.log('add fin')
 
     console.log(req.body)
@@ -130,22 +133,22 @@ MongoClient.connect(url, function(err, client) {
     });    
   });
 
-  // 🦄🦄c52. upadate.ejs, upadate-id.ejs
+  // 🦄🦄c52. update.ejs, update-id.ejs
   /* 
-    1 'upadate' - 'upadate-id'페이지 따로만듬
+    1 'update' - 'update-id'페이지 따로만듬
     2. app.get()도 따로 만듬
     에러없이 정상작동됨
   */
-  app.get("/upadate", function (req, res) {
-    res.render('upadate.ejs')
+  app.get("/update", function (req, res) {
+    res.render('update.ejs')
   });
 
-  // 🍀 /upadate/:id
-  app.get("/upadate/:id", function (req, res) {
+  // 🍀 /update/:id
+  app.get("/update/:id", function (req, res) {
     db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err, p_db결과) {    
         
       console.log(p_db결과)
-      res.render('upadate-id.ejs',{ig_post: p_db결과})      
+      res.render('update-id.ejs',{ig_post: p_db결과})      
     })
   });
 
