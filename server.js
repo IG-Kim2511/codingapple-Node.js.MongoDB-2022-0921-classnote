@@ -130,22 +130,22 @@ MongoClient.connect(url, function(err, client) {
     });    
   });
 
-  // 🦄🦄c52. 👉edit.ejs, 👉edit-id.ejs
+  // 🦄🦄c52. upadate.ejs, upadate-id.ejs
   /* 
-    1 'edit' - 'edit-id'페이지 따로만듬
+    1 'upadate' - 'upadate-id'페이지 따로만듬
     2. app.get()도 따로 만듬
     에러없이 정상작동됨
   */
-  app.get("/edit", function (req, res) {
-    res.render('edit.ejs')
+  app.get("/upadate", function (req, res) {
+    res.render('upadate.ejs')
   });
 
-  // 🍀 /edit/:id
-  app.get("/edit/:id", function (req, res) {
+  // 🍀 /upadate/:id
+  app.get("/upadate/:id", function (req, res) {
     db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err, p_db결과) {    
         
       console.log(p_db결과)
-      res.render('edit-id.ejs',{ig_post: p_db결과})      
+      res.render('upadate-id.ejs',{ig_post: p_db결과})      
     })
   });
 
