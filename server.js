@@ -172,8 +172,9 @@ MongoClient.connect(url, function(err, client) {
     db.collection('co0921').updateOne({_id:parseInt(req.body.ig_id)},{$set:{title: req.body.ig_title, date: req.body.ig_date}},function (p_err, p_res) {
       console.log('ig- update- fin')
 
+      // 🍀redirect
+      // res.render('list.ejs'); 로 하면 에러남 (왜인지는 모름)
       res.redirect('/list');
-      // res.render('list.ejs');
     })
   });
 
