@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     
         
     <%- include('./nav_c50.html') %>
-    <h1 class="title-page">/views/edit.ejs  </h1>
+    <h1 class="title-page">/views/edit-id.ejs  </h1>
+
+    <h4>Title: <%= ig_post.title %> </h4>
+    <h4>Date:  <%= ig_post.date %></h4>
 
 
     <div class="container mt-3">
@@ -25,16 +26,17 @@
         <div class="form-group">
           <label>오늘의 할일</label>
 
-          <input type="text" class="form-control" name="ig_title" />
+          <input type="text" class="form-control" name="ig_title" value=" <%= ig_post.title %>"/>
         </div>
         <div class="form-group">
           <label>날짜</label>
 
     
-          <input type="text" class="form-control" name="ig_data" />
+          <input type="text" class="form-control" name="ig_data" value=" <%= ig_post.date %>"/>
         </div>
         <button type="submit" class="myBtn btn-outline-secondary">Submit</button>
       </form>
     </div>
+    
 </body>
 </html>

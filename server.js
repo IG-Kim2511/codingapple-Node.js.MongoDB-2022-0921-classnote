@@ -140,7 +140,7 @@ MongoClient.connect(url, function(err, client) {
     db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err, p_db결과) {    
         
       console.log(p_db결과)
-      res.render('edit.ejs',{ig_post: p_db결과})      
+      res.render('edit-id.ejs',{ig_post: p_db결과})      
     })
   });
 
