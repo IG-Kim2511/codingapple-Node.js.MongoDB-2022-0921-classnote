@@ -48,6 +48,11 @@ app.get("/write", function (req, res) {
     res.render('write.ejs')
 });
 
+// 🦄🦄c52
+app.get("/edit", function (req, res) {
+    res.render('edit.ejs')
+});
+
 
   // 🦄🦄c28 
 
