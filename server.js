@@ -210,10 +210,14 @@ app.get('/login',(req,res)=>{
 });
 
 
-// passport-local
+  app.get('/login_fail',function (req,res) {
+    res.render('login_fail.ejs')    
+  })
+
+// passport
 
 app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local', { failureRedirect: '/login_fail' }),
   function(req, res) {
     console.log('🦄c58. login')
     res.redirect('/');
@@ -229,15 +233,16 @@ passport.use(new LocalStrategy(
   session: true,
   passReqToCallback:false,
   },
-  function(username, password, done) {
-    db.collection('login').findOne({ ig_login_id: username }, function (err, user) {
+  function(입력한username, 입력한password, done) {
+    db.collection('login').findOne({ ig_login_id: 입력한username }, function (err, user결과) {
 
-      console.log(user)
+      console.log(`🦄c60 success `)
+      console.log(user결과)
 
       if (err) { return done(err); }
-      if (!user) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
-      if (password == user.ig_pw) { return done(null, false); }
-      return done(null, user);
+      if (!user결과) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
+      if (입력한password == user결과.ig_pw) { return done(null, false); }
+      return done(null, user결과);
     });
   }
 ));
