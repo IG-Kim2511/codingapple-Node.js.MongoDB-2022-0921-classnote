@@ -233,13 +233,13 @@ app.post('/login',
 
 passport.use(new LocalStrategy(
   {
-  usernameField:'ig_id',             // 👉login_c58.ejs
-  passwordField:'ig_pw',            // 👉login_c58.ejs
+  usernameField:'id',             // 👉login_c58.ejs
+  passwordField:'pw',            // 👉login_c58.ejs
   session: true,                       // login 후 session을 저장할것인지?
   passReqToCallback:false,
   },
   function(입력한username, 입력한password, done) {
-    db.collection('login').findOne({ ig_login_id: 입력한username }, function (err, user결과) {
+    db.collection('login').findOne({ id: 입력한username }, function (err, user결과) {
 
       console.log(`🦄c60 success `)
       console.log(user결과)
@@ -260,22 +260,26 @@ passport.use(new LocalStrategy(
 
       if (err) { return done(err); }
       if (!user결과) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
-      if (입력한password == user결과.ig_pw) { 
-         return done(null, false);
+      if (입력한password !== user결과.pw) { 
+         return done(null, false,{message: '비번 틀림'});
       }
-      return done(null, user결과);
+      return done(null, user결과,{message:'성공'});
+
     });
   }
 ));
 
 // -70)
-// login 성공 때, id를 이용해서 session을 저장
+// login 성공 때, id를 이용해서 session을 저장 (session의 id정보를 cookie로 보냄)
+// 👉f12 -> Application -> Cookies에서 확인
 passport.serializeUser(function(user, done) {
+
   done(null, user.id);
 });
 
 // login 성공 때, 위의 session데이터를 가진사람을 db에서 찾아주세요
 passport.deserializeUser(function(id, done) {
+
   User.findById(id, function (err, user) {
     done(err, user);
   });
