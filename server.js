@@ -179,6 +179,11 @@ MongoClient.connect(url, function(err, client) {
   });
 
 
+  // 🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
+  // 🦄🦄🦄🦄🦄🦄🦄🦄여기부터 필기노트 옮김🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
+  console.log('🦄🦄여기부터 필기노트 옮김')
+
+
 // 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
 // 🦄🦄c58 (회원 로그인1) 미들웨어, app.use(~), passport, express-session, passport.authenticate(~),passport.use(new LocalStorategy(~))
 
@@ -215,7 +220,7 @@ app.get('/login_fail',function (req,res) {
 })
 
 
-// passport
+// 🍀assport
 /*🍀-20)
   passport.authenticate('local') : (인증해주세요)함수 ,    
   인증 실패시 (failureRedirect : '/fail') :  '/login_fail' 로 연결 
@@ -229,8 +234,8 @@ app.post('/login',
   });
 
 
-// passport-local
-
+// 🍀passport-local
+// 🍀c60-30) passport.authenticate('local',~)...로그인 성공시, 다음코드 실행됨
 passport.use(new LocalStrategy(
   {
   usernameField:'id',             // 👉login_c58.ejs
