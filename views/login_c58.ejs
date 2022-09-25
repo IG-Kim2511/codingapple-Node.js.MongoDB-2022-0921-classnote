@@ -12,6 +12,9 @@
     <%- include('./nav_c50.html') %>
 
     <h1 class="title-page">/views/login_c58.ejs  </h1>    
+
+
+    <!-- 🦄c58 -->
     
     <form  method="POST" action="/update-id?_method=PUT">
           
@@ -24,7 +27,11 @@
           <br>
           <label>날짜: </label>
           <!-- value -->
-          <input type="text" name="ig_date" />
+          <input type="text" name="ig_pw" />
+
+          <!-- 🍀password 쓰는게 정석.
+            지금은 걍 테스트용이므로 type="text" 사용함 -->
+          <!-- <input type="password" name="ig_pw" /> -->
         </div>
   
         <button type="submit" class="myBtn">Submit</button>
