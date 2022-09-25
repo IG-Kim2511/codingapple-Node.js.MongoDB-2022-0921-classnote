@@ -241,7 +241,8 @@ passport.use(new LocalStrategy(
   function(입력한username, 입력한password, done) {
     db.collection('login').findOne({ id: 입력한username }, function (err, user결과) {
 
-      console.log(`🦄c60 success `)
+      console.log(colors.yellow('🦄c60 success'))            
+      console.log(입력한username,입력한password)
       console.log(user결과)
 
       /*-40)
@@ -305,7 +306,9 @@ passport.deserializeUser(function(id, done) {
 
   // 🍀listen
   app.listen(process.env.PORT, function () {
+      console.log(colors.green('hello'))
       console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
+      
   });
 
   // cliend.close()있으면 post가 안됨..왜인지는 모름
