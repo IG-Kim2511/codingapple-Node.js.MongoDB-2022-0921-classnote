@@ -210,12 +210,17 @@ app.get('/login',(req,res)=>{
 });
 
 
-  app.get('/login_fail',function (req,res) {
-    res.render('login_fail.ejs')    
-  })
+app.get('/login_fail',function (req,res) {
+  res.render('login_fail.ejs')    
+})
+
 
 // passport
-
+/*🍀-20)
+  passport.authenticate('local') : (인증해주세요)함수 ,    
+  인증 실패시 (failureRedirect : '/fail') :  '/login_fail' 로 연결 
+  인증 성공시 : res응답.redirect('/') 
+*/
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/login_fail' }),
   function(req, res) {
@@ -228,9 +233,9 @@ app.post('/login',
 
 passport.use(new LocalStrategy(
   {
-  usernameField:'ig_id',
-  passwordField:'ig_pw',
-  session: true,
+  usernameField:'ig_id',             // 👉login_c58.ejs
+  passwordField:'ig_pw',            // 👉login_c58.ejs
+  session: true,                       // login 후 session을 저장할것인지?
   passReqToCallback:false,
   },
   function(입력한username, 입력한password, done) {
@@ -239,9 +244,25 @@ passport.use(new LocalStrategy(
       console.log(`🦄c60 success `)
       console.log(user결과)
 
+      /*-40)
+        error처리
+        DB에 ID가 없을때
+        DB에 ID가 있을때
+        DB에 ID가 있으면, input password == DB password 비교함
+
+        -50)
+        done: 3개의 argument를 가짐
+        done(서버에러, 성공시 사용자 db데이터, 에러 메시지)
+
+        -60)        
+        입력한 비밀번호를 암호화한 후 ,DB의 비밀번호와 비교해야함 (나중에 알아서 하세요)
+      */
+
       if (err) { return done(err); }
       if (!user결과) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
-      if (입력한password == user결과.ig_pw) { return done(null, false); }
+      if (입력한password == user결과.ig_pw) { 
+         return done(null, false);
+      }
       return done(null, user결과);
     });
   }
