@@ -15,18 +15,21 @@
 
 
     <!-- 🦄c58 -->
-    
-    <form  method="POST" action="/update-id?_method=PUT">
+
+    <!--🥒c58 /login 경로로, POST요청함 👉server.js     -->
+    <form  method="POST" action="/login">
           
         <div class="form-group">
       
-          <label>오늘의 할일: </label>   
-          <!-- value  -->
-          <input type="text" name="ig_title" />
+          <label>ig_id: </label>   
+      
+           <!-- 🥒c58, name="ig_login_id" -->
+          <input type="text" name="ig_id" />
 
           <br>
-          <label>날짜: </label>
-          <!-- value -->
+          <label>ig_pw : </label>
+      
+           <!-- 🥒c58, name="ig_login_password" ,  type="password"-->   
           <input type="text" name="ig_pw" />
 
           <!-- 🍀password 쓰는게 정석.

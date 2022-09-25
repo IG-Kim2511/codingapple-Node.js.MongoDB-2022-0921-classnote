@@ -210,6 +210,50 @@ app.get('/login',(req,res)=>{
 });
 
 
+// passport-local
+
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log('🦄c58. login')
+    res.redirect('/');
+  });
+
+
+// passport-local
+
+passport.use(new LocalStrategy(
+  {
+  usernameField:'ig_id',
+  passwordField:'ig_pw',
+  session: true,
+  passReqToCallback:false,
+  },
+  function(username, password, done) {
+    db.collection('login').findOne({ ig_login_id: username }, function (err, user) {
+
+      console.log(user)
+
+      if (err) { return done(err); }
+      if (!user) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
+      if (password == user.ig_pw) { return done(null, false); }
+      return done(null, user);
+    });
+  }
+));
+
+// -70)
+// login 성공 때, id를 이용해서 session을 저장
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+// login 성공 때, 위의 session데이터를 가진사람을 db에서 찾아주세요
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
 
 
 
