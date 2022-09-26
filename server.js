@@ -326,6 +326,32 @@ MongoClient.connect(url, function(err, client) {
 
 
 
+  // 🦄🦄c64 .env 파일, environment variable, 가변적인 변수 데이터들 관리하기 
+  // 👉.env  
+  console.log('🦄🦄c64 ')
+
+
+  /* 
+    🍀 npm install dotenv
+
+    🍀 👉상단코드 : 
+      root folder에 .env파일 만들때 : require('dotenv').config()
+      다른 folder(env_c64)에 .env파일 만들때 : require('dotenv').config({path: "./env_c64/.env"})
+    
+    🍀 server.js와 같은 폴더에 '.env'파일 만듬
+    👉.env  
+  */
+
+
+
+
+
+
+
+
+
+
+
 
 
 
