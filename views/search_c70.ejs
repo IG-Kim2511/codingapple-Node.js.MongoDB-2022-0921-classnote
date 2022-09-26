@@ -32,10 +32,13 @@
           <br><br>
           <h2>🍀title(제목) 검색하면, 정확히게 일치하는 오브젝트가 검색됨</h2>
         
-   
+        <!-- 
           🍀bug & A
-          ㅂ)search하기전에는 array가 비어있기때문인지,search_c70.ejs 로딩할때 에러가 생김
-          👉일단은 search_c70-bug.ejs에 옮겨놓음
+          버그)search하기전에는 array가 비어있기때문인지,search_c70.ejs 로딩할때 에러가 생김
+
+          👉  if (ig_posts) 안에, for넣어서 해결
+          if조건문안에 (ig_posts)넣은게 핵심
+        -->
 
           <% if (ig_posts) { %>
            
@@ -54,10 +57,8 @@
                   
                 </div>
               <%  }  %>  
+
           <% } %>
-    
-
-
       
       </section>
 
