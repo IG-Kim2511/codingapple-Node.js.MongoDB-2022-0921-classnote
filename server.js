@@ -305,6 +305,8 @@ MongoClient.connect(url, function(err, client) {
 
   // 🍀62-50. app.get("/mypage",~~~~), 
   app.get("/mypage",middleware로그인확인, function (req, res) {
+    console.log(colors.bgBrightYellow(` app.get("/mypage"`))
+    console.log(req.user)
     res.render('mypage_62.ejs')
   });
 
@@ -313,6 +315,7 @@ MongoClient.connect(url, function(err, client) {
   // req.user가 없으면 html에 메시지 띄움
   function middleware로그인확인(req,res,next) {
   if (req.user) {
+    console.log(colors.bgBrightGreen('middleware로그인확인'))
     next()    
   } else {
     res.send('로그인 안했습니다.');    
