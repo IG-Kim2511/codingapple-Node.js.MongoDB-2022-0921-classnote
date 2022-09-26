@@ -1,3 +1,32 @@
+
+
+/* 
+  🦄🦄🦄ig 정리 : 자주쓰는 node.js, mongoDB 문법
+
+
+  🍀
+  app.get("/", function (req요청, res응답) {
+    res응답.render('index.ejs')
+    res.sendFile(__dirname + "/style.css");
+  })
+
+  app.post('/add',function (req,res) {   })
+
+  app.delete('/delete',function (req,res) {   })
+
+  app.put('/update',function (req,res) {   })
+
+  🍀
+  .insertOne({},function (err,res) {})
+  .updateOne({},function (err,res) {})
+  .deleteOne({},function (err,res) {})
+
+  🍀
+  .findOne({},function (err,res) {})
+  .find({title:req.query.value}).toArray((err,db결과)=>{ })
+
+*/
+
 const express = require("express");
 const app = express();
 
@@ -344,7 +373,7 @@ MongoClient.connect(url, function(err, client) {
 
 
   //🦄🦄c66 검색기능1 Query string parameters, ('/search?value='+입력한value), req.query.value, window.location.replace('/~')
-  //🦄🦄c68 검색기능2 mongoDB사이트...index탭, Binary Search, 
+
   // 👉views/list.ejs : html, javascript 
 
   /* 
@@ -400,7 +429,8 @@ MongoClient.connect(url, function(err, client) {
 
 
 
-
+  //🦄🦄c68 검색기능2 mongoDB사이트...index탭, Binary Search, 
+  //🦄🦄c70 검색기능3 mongoDB사이트...search index탭, $.parma(~), $("#form").serialize(~), aggregate(~), $search, $sort,$limit, $project, {$meta:"searchScore"}
 
 
 
