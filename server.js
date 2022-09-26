@@ -35,7 +35,7 @@ app.use(methodOverride('_method'))
 // 🍀get, post, put, delete
 
 // 🍀get
-app.get("/", function (req, res) {
+app.get("/", function (req요청, res응답) {
   //res.send('ig node server')
   
   // html
@@ -43,7 +43,7 @@ app.get("/", function (req, res) {
 
   //🦄c50. ejs : html과 달리 render(~) 라는거 헷갈리지 말기
   // 👉index.ejs
-  res.render('index.ejs')
+  res응답.render('index.ejs')
 
 });
 
@@ -187,7 +187,7 @@ MongoClient.connect(url, function(err, client) {
 // 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
 // 🦄🦄c58 (회원 로그인1) 미들웨어, app.use(~), passport, express-session, passport.authenticate(~), passport.use(new LocalStorategy(~))
 
-// 🦄🦄c60 (회원 로그인2) 아이디 비번을 DB와 비교하고 세션 만들어주기, passport-local, passport.serializeUser(~)
+// 🦄🦄c60 (회원 로그인2) passport-local, passport.serializeUser(~), bcryptjs
 // 🦄🦄c62 (회원 로그인3) 로그인 유저만 접속할 수 있는 페이지 만들기
 console.log('🦄🦄c56,58,60,62')
 
@@ -246,7 +246,7 @@ passport.use(new LocalStrategy(
   function(입력한username, 입력한password, done) {
     db.collection('login').findOne({ id: 입력한username }, function (err, user결과) {
 
-      console.log(colors.yellow('🦄c60 success'))            
+      console.log(colors.bgYellow('passport.use(new LocalStrategy'))            
       console.log(입력한username,입력한password)
       console.log(user결과)
 
@@ -278,16 +278,21 @@ passport.use(new LocalStrategy(
 // -70)
 // login 성공 때, id를 이용해서 session을 저장 (session의 id정보를 cookie로 보냄)
 // 👉f12 -> Application -> Cookies에서 확인
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function(user정보, done) {
+  console.log(colors.bgYellow('passport.serializeUser'))
+  console.log(user정보)
 
-  done(null, user.id);
+  done(null, user정보.id);
 });
 
-// login 성공 때, 위의 session데이터를 가진사람을 db에서 찾아주세요
+// login 성공 때, 위의 session데이터를 가진사람(login한 유저)의 정보를 db에서 찾아줌
+// user정보 : db에서 찾은 정보
 passport.deserializeUser(function(id, done) {
 
-  User.findById(id, function (err, user) {
-    done(err, user);
+  console.log(colors.bgYellow('passport.deserializeUser'))
+
+  User.findById(id, function (err, user정보) {
+    done(err, user정보);
   });
 });
 
@@ -299,19 +304,9 @@ passport.deserializeUser(function(id, done) {
 
 
 
-
-
-
-
-
-
-
-
-
-
   // 🍀listen
   app.listen(process.env.PORT, function () {
-      console.log(colors.green('ig server gogo'))
+      console.log(colors.bgBrightBlue('bgBrightBlue'))
       console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
       
   });
