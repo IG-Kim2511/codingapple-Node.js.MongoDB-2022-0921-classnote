@@ -1,32 +1,5 @@
-/* 🦄 기본 수업준비 */
 
-  
-.title {
-  background-color: lightsteelblue;
-}
-
-.overflow {
-  overflow: hidden;
-}
-.relative {
-  position: relative;
-}
-
-.display-none {
-  display: none;
-}
-
-.display-block {
-  display: block;
-}
-
-.transforming {
-  transition: transform 0.5s;
-}
-
-  /* JS 36. C 33 */
-  /*Global */
-  
+  /*Global */  
   :root {
     /* color */
   
