@@ -192,7 +192,7 @@ MongoClient.connect(url, function(err, client) {
   // 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
   // 🦄🦄c58 (회원 로그인1) 미들웨어, app.use(~), passport, express-session, passport.authenticate(~), passport.use(new LocalStorategy(~))
   // 🦄🦄c60 (회원 로그인2) passport-local, passport.serializeUser(~), bcryptjs
-  // 🦄🦄c62 (회원 로그인3) 로그인 유저만 접속할 수 있는 페이지 만들기
+  // 🦄🦄c62 (회원 로그인3) mypage.ejs, middleware로그인확인, passport.deserializeUser, req.user: db의 데이터
   // 👉mypage.ejs
 
   console.log('🦄🦄c56,58,60,62')
@@ -304,6 +304,7 @@ MongoClient.connect(url, function(err, client) {
   });
 
   // 🍀62-50. app.get("/mypage",~~~~), 
+  // 🍉req.user : db의 데이터
   app.get("/mypage",middleware로그인확인, function (req, res) {
     console.log(colors.bgBrightYellow(`/mypage : req.user`))
     console.log(req.user)
