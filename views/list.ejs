@@ -19,7 +19,8 @@
 
       <br><br>
 
-      <!-- 🥒🦄c66 -->
+      <!-- 👉🦄c66 -->
+      <!-- 👉하단의 js코드 -->
       <div>
         <!-- id="search-input", id="search" -->
         <input type="text" id="search-input">
@@ -62,31 +63,91 @@
       
       </section>
 
-    <!-- 🦄🦄c42,44,46, AJAX로 DELETE 요청하기 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- 🦄🦄c42,44,46, AJAX로 DELETE 요청하기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script>
-      $('.delete').click((e)=>{           
+<script>
+    $('.delete').click((e)=>{           
 
-          // 🍀44
-          $.ajax({
-            method: "DELETE",
-            url: "/delete",
-            data: {_id: e.target.dataset.id}
-            
-          }).done(function() {
-            
-            $(this).parent('div').fadeOut();
-            location.reload();
+        // 🍀44
+        $.ajax({
+          method: "DELETE",
+          url: "/delete",
+          data: {_id: e.target.dataset.id}
           
-            console.log('ig delete success - list.js')
-          }).fail(function (jqXHR, textStatus) {                  //🥒c46-40)
+        }).done(function() {
+          
+          $(this).parent('div').fadeOut();
+          location.reload();
+        
+          console.log('ig delete success - list.js')
+        }).fail(function (jqXHR, textStatus) {                  //👉c46-40)
 
-          console.log('c44, delete-fail')
-          console.log( "Request failed: " + textStatus );   
-          });
-      });
-    </script>
+        console.log('c44, delete-fail')
+        console.log( "Request failed: " + textStatus );   
+        });
+    });
+
+
+    //🦄🦄c66
+    //🍀c66-10). search기능 만들기, query string 만듬 (Query string parameters)
+      /* 🍄
+        -2) search btn click,       
+
+        -6) ejs -> server.js로  데이터 보냄 끝 
+
+          6-a) POST요청으로 기능만들기. 끝
+          
+          6-b) GET요청으로 만들어보기  👉 이제부터 할 코드 👉 "Query string parameters"사용함
+      */
+
+      /* 🍉Query string parameters
+      
+           `/~ㄴ~?~ㄱ~`
+
+           `/~ㄴ~?value=${~ㄱ~}`
+
+          버튼 클릭, ㄱ을 ㄴ서버로 get요청 , 
+      */
+
+
+    // 🍉
+      $('#search').click(function () {
+        
+           //🥒 window.location.replace('/search') : 버튼 클릭, /search로 이동함 = app.get(~)과 비슷함
+          // 👉server.js.... app.get('/search',~ ) 로 연결됨
+          // window.location.replace('/search')
+
+
+          // 🥒 $('#search-input').val() : input value 
+          // 🥒 Query string parameters: `/~~?value=${~~~~}`
+          
+          var ig_search_input값 = $('#search-input').val()
+
+          window.location.replace(`/search?value=${ig_search_input값}`)        
+      })
+
+
+
+
+//         $('#search').click(function () {           
+
+  // // $('#search-input').val() : input value 
+  // var ig_search_input값 = $('#search-input').val()
+
+  // // window.location.replace('/search')
+  // // `/~~?value=${ig_search_input값}`
+  // window.location.replace(`/search?value=${ig_search_input값}`)
+
+  // })
+
+
+
+
+
+
+
+  </script>
 
 
 </body>

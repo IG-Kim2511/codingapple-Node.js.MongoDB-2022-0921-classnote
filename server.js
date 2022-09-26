@@ -345,6 +345,64 @@ MongoClient.connect(url, function(err, client) {
 
   //🦄🦄c66 검색기능1 Query string parameters, .replace('/search?value=' + 입력한value), req요청.query.value
   //🦄🦄c68 검색기능2 mongoDB사이트...index탭, Binary Search, 
+  // 👉views/list.ejs : html, javascript 
+
+  /* 
+    🍀c66) Query string parameters : 
+    b 검색하면 url뒤로 몰래 정보를 전달함
+    ? ~~a~~ = ~~b~~
+
+    🍀c66-20) server.js에서 query string꺼내씀, DB에서 데이터 꺼냄. 
+
+    -a) req요청.query : get함수에서 요청.body 쓰는것과 비슷하게 사용하는 방식임
+
+    -b)
+      collection().findOne()           : 1개 찾을 때
+      collection().find().toArray()     : 여러개 찾을 때
+    */
+  app.get('/search',(req,res)=>{
+
+    
+    // 🥒req.query 
+    console.log(req.query)
+    console.log(req.query.value)
+
+     // 🥒 collection().find().toArray()  
+    // find({제목:req요청.query.value})  👉 문제점: 정확히 일치하는 것만 찾아줌
+    db.collection('co0921').find({title:req.query.value}).toArray((p_err,p_db결과)=>{
+      console.log(p_db결과)
+
+      
+      //🍀🦄c68-10) 
+      // 👉search_c68.ejs
+
+      /*🍀-20)
+          정규표현식이란?(Regular Expression: Regex)
+          https://iankim2511.tistory.com/862
+
+
+          /글쓰기/ 들어간것 모두 찾아줌
+          검색할게 1억개있다면?? 
+
+
+          🍀-30) 👉mongoDB사이트  collection 👉 index
+          가나다라 정렬
+          오름차순, 내림차순
+          동시에 여러개 설정가능함      
+      */
+
+
+      // res.render('search_c68.ejs',{ig_posts:p_db결과});
+
+    })
+  });
+
+
+
+
+
+
+
 
 
 
