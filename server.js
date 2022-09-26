@@ -421,10 +421,11 @@ MongoClient.connect(url, function(err, client) {
    
 
   //🦄🦄c70 검색기능3 mongoDB사이트...search index탭, $.parma(~), $("#form").serialize(~), aggregate(~), $search, $sort,$limit, $project, {$meta:"searchScore"}
+  // 👉mongoDB사이트  collection 👉 index
+  // 👉 mongoDB사이트...search index탭 활용함
 
   /* 
     🍀70-2) me: okky처럼 구글로 검색이동시키는 방법도 있음, 
-    🍀70-10) c68에서 만든 mongoDB사이트...search index탭 활용함
   */
 
 
@@ -434,6 +435,7 @@ MongoClient.connect(url, function(err, client) {
       console.log(req요청.query.value)
 
       //  🍀70-15) .find(검색조건).toArray()
+      // 👉mongoDB사이트  collection 👉 index
       // {title:req요청.query.value} : full scan하는 이전 방법      
       /*      
         db.collection('co0921').find({title:req요청.query.value}).toArray((P_err,p_db)=>{
@@ -454,32 +456,7 @@ MongoClient.connect(url, function(err, client) {
 
       
       //  🍀70-20) .aggregate(검색조건).toArray()  
-      // //70-20) .aggregate(검색조건).toArray()  
-      // var 검색조건 =[
-      //   {
-      //     $search:{
-      //       index : "ig_titleSearch",
-      //       text:{
-      //         query: req요청.query.value,
-      //         path: "제목"
-      //       }
-  
-      //     }
-      //   },
-      //   // 70-30)$sort, $limit,$project
-      //   {$sort :{_id :1}},
-      //   {$limit : 10},
-      //   {$project : {제목 : 1, _id: 0, score :{$meta : "searchScore"}}}
-      // ];
-      // db.collection('co0921').aggregate(검색조건).toArray((err,p_db결과)=>{
-      //   console.log(p_db결과)
-  
-  
-      //   res응답.render('search_c70.ejs',{ig_posts:p_db결과});
-      // })       
-
-
-
+      // 👉 mongoDB사이트...search index탭 활용함      
       /* 
         🍀70-30)
           $sort : 
@@ -498,10 +475,29 @@ MongoClient.connect(url, function(err, client) {
           searchScore:  검색어와 게시물의 관련석이 높은것, 검색 많이 하는 항목은 score가 높아짐
 
           score는 collection에 없어도 이런식으로 코딩하면 , 
-          검색결과필터링으로 넣어줌
-      
-      
+          검색결과필터링으로 넣어줌      
       */
+
+      let 검색조건 =[
+        {
+          $search:{
+            index : "ig_titleSearch",
+            text:{
+              query: req요청.query.value,
+              path: ["title",'date']        //db안의 오브젝트 이름
+            }  
+          }
+        },
+        // 70-30)$sort, $limit,$project
+        {$sort :{_id :1}},
+        {$limit : 10},
+        {$project : {title : 1, date:1, _id: 0, score :{$meta : "searchScore"}}}
+      ];
+      db.collection('co0921').aggregate(검색조건).toArray((err,p_db결과)=>{
+        console.log(p_db결과)  
+  
+        res응답.render('search_c70.ejs',{ig_posts:p_db결과});
+      })       
     });
 
 
