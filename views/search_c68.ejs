@@ -15,7 +15,7 @@
     -->
     <%- include('./nav_c50.html') %>  
    
-    <h1 class="title-page">./views/list.ejs</h1>
+    <h1 class="title-page">./views/search_c68.ejs</h1>
 
       <br><br>
 
@@ -30,20 +30,18 @@
    
       <br>
       <section>
-          <h2>🍀c32. 서버에서 가져온 할일 리스트</h2>
+          <h2>🍀ig_posts[0].title</h2>
   
           <!-- 🍀c34 -->
-          <h4>할일 제목 : <%= ig_posts %></h4>
+
+          <h4>할일 제목 : <%= ig_posts[0].title %></h4>
           <p>할일 마감날짜 : <%= ig_posts[0].date %></p>
           
-          <br><br>
-          <h2>🍀c34 반복문</h2>
-          <!-- 🦄c34 반복문     <%  %>   
-              for (let i = 0; i < array.length; i++) {
-                 array[i];              
-              }        
-          -->
           
+          <br><br>
+          <h2>🍀title검색하면, 정확히게 일치하는 오브젝트가 검색됨</h2>
+        
+
           <%    for (let i = 0; i < ig_posts.length; i++) {   %>  
             <div class="list">
               <h2>id: <%= ig_posts[i]._id %></h2>

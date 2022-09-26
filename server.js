@@ -400,6 +400,8 @@ MongoClient.connect(url, function(err, client) {
      // 🥒 collection().find().toArray()  
     // find({제목:req요청.query.value})  👉 문제점: 정확히 일치하는 것만 찾아줌
     db.collection('co0921').find({title:req.query.value}).toArray((p_err,p_db결과)=>{
+      
+      console.log(colors.bgBrightMagenta('get./search'))
       console.log(p_db결과)
 
   
