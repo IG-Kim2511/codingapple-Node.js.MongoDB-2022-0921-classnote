@@ -34,12 +34,9 @@
   
           <!-- 🍀c34 -->
 
-          <h4>할일 제목 : <%= ig_posts[0].title %></h4>
-          <p>할일 마감날짜 : <%= ig_posts[0].date %></p>
-          
           
           <br><br>
-          <h2>🍀title검색하면, 정확히게 일치하는 오브젝트가 검색됨</h2>
+          <h2>🍀title(제목) 검색하면, 정확히게 일치하는 오브젝트가 검색됨</h2>
         
 
           <%    for (let i = 0; i < ig_posts.length; i++) {   %>  
@@ -122,7 +119,7 @@
           
           var ig_search_input값 = $('#search-input').val()
 
-          window.location.replace(`/search?value=${ig_search_input값}`)        
+          window.location.replace(`/search_c68?value=${ig_search_input값}`)        
       })
   </script>
 </body>

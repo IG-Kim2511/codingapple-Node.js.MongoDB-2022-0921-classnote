@@ -390,7 +390,7 @@ MongoClient.connect(url, function(err, client) {
       collection().findOne()           : 1개 찾을 때
       collection().find().toArray()     : 여러개 찾을 때
     */
-  app.get('/search',(req,res)=>{
+  app.get('/search_c68',(req,res)=>{
 
     
     // 🥒req.query 
@@ -408,28 +408,18 @@ MongoClient.connect(url, function(err, client) {
       //🦄🦄c68 검색기능2 mongoDB사이트...index탭, Binary Search, 
       // 👉views/👉search_c68.ejs
 
-      /*🍀-20)
-          정규표현식이란?(Regular Expression: Regex)
-          https://iankim2511.tistory.com/862
-
-          /글쓰기/ 들어간것 모두 찾아줌
-          검색할게 1억개있다면?? 
-
-          🍀-30) 👉mongoDB사이트  collection 👉 index
-          가나다라 정렬
-          오름차순, 내림차순
-          동시에 여러개 설정가능함      
+      /*
+        🍀-30) 👉mongoDB사이트  collection 👉 index
+        가나다라 정렬
+        오름차순, 내림차순
+        동시에 여러개 설정가능함      
       */
 
       res.render('search_c68.ejs',{ig_posts:p_db결과});
 
     })
   });
-
-      
-      
-
-
+   
 
   //🦄🦄c70 검색기능3 mongoDB사이트...search index탭, $.parma(~), $("#form").serialize(~), aggregate(~), $search, $sort,$limit, $project, {$meta:"searchScore"}
 
