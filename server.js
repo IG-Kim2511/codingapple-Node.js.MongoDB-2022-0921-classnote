@@ -343,8 +343,8 @@ MongoClient.connect(url, function(err, client) {
   */
 
 
-
-
+  //🦄🦄c66 검색기능1 Query string parameters, .replace('/search?value=' + 입력한value), req요청.query.value
+  //🦄🦄c68 검색기능2 mongoDB사이트...index탭, Binary Search, 
 
 
 
