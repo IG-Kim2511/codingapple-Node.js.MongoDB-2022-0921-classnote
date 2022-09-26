@@ -305,7 +305,7 @@ MongoClient.connect(url, function(err, client) {
 
   // 🍀62-50. app.get("/mypage",~~~~), 
   app.get("/mypage",middleware로그인확인, function (req, res) {
-    console.log(colors.bgBrightYellow(` app.get("/mypage"`))
+    console.log(colors.bgBrightYellow(`/mypage : req.user`))
     console.log(req.user)
     res.render('mypage_62.ejs')
   });
