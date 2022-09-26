@@ -29,9 +29,6 @@ app.use(methodOverride('_method'))
 
 
 
-
-
-
 // 🍀get, post, put, delete
 
 // 🍀get
@@ -57,6 +54,13 @@ app.get("/write", function (req, res) {
 
     res.render('write.ejs')
 });
+
+// 🥒c62
+app.get("/mypage", function (req, res) {
+    res.render('mypage_62.ejs')
+});
+
+
 
 
 // 🦄🦄c28 
@@ -184,135 +188,141 @@ MongoClient.connect(url, function(err, client) {
   console.log('🦄🦄여기부터 필기노트 옮김')
 
 
-// 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
-// 🦄🦄c58 (회원 로그인1) 미들웨어, app.use(~), passport, express-session, passport.authenticate(~), passport.use(new LocalStorategy(~))
+  // 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
+  // 🦄🦄c58 (회원 로그인1) 미들웨어, app.use(~), passport, express-session, passport.authenticate(~), passport.use(new LocalStorategy(~))
+  // 🦄🦄c60 (회원 로그인2) passport-local, passport.serializeUser(~), bcryptjs
+  // 🦄🦄c62 (회원 로그인3) 로그인 유저만 접속할 수 있는 페이지 만들기
+  // 👉mypage.ejs
 
-// 🦄🦄c60 (회원 로그인2) passport-local, passport.serializeUser(~), bcryptjs
-// 🦄🦄c62 (회원 로그인3) 로그인 유저만 접속할 수 있는 페이지 만들기
-console.log('🦄🦄c56,58,60,62')
+  console.log('🦄🦄c56,58,60,62')
 
-// 👉login_c58.ejs
-
-
-// 🍀c58-10)
-// passport
-const passport = require('passport');
-
-// passport-local
-const LocalStrategy = require('passport-local').Strategy;
-
-// express-session
-const session = require('express-session');
-
-// middleware
-app.use(session({ secret: 'ig123', resave: true, saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
+  // 👉login_c58.ejs
 
 
-app.get('/login',(req,res)=>{
-  res.render('login_c58.ejs');
-});
+  // 🍀c58-10)
+  // passport
+  const passport = require('passport');
+
+  // passport-local
+  const LocalStrategy = require('passport-local').Strategy;
+
+  // express-session
+  const session = require('express-session');
+
+  // middleware
+  app.use(session({ secret: 'ig123', resave: true, saveUninitialized: false }));
+  app.use(passport.initialize());
+  app.use(passport.session());
 
 
-app.get('/login_fail',function (req,res) {
-  res.render('login_fail.ejs')    
-})
-
-
-// 🍀assport
-/*🍀-20)
-  passport.authenticate('local') : (인증해주세요)함수 ,    
-  인증 실패시 (failureRedirect : '/fail') :  '/login_fail' 로 연결 
-  인증 성공시 : res응답.redirect('/') 
-*/
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login_fail' }),
-  function(req, res) {
-    console.log('🦄c58. login')
-    res.redirect('/');
+  app.get('/login',(req,res)=>{
+    res.render('login_c58.ejs');
   });
 
 
-// 🍀passport-local
-// 🍀c60-30) passport.authenticate('local',~)...로그인 성공시, 다음코드 실행됨
-passport.use(new LocalStrategy(
-  {
-  usernameField:'id',             // 👉login_c58.ejs
-  passwordField:'pw',            // 👉login_c58.ejs
-  session: true,                       // login 후 session을 저장할것인지?
-  passReqToCallback:false,
-  },
-  function(입력한username, 입력한password, done) {
-    db.collection('login').findOne({ id: 입력한username }, function (err, user결과) {
+  app.get('/login_fail',function (req,res) {
+    res.render('login_fail.ejs')    
+  })
 
-      console.log(colors.bgYellow('passport.use(new LocalStrategy'))            
-      console.log(입력한username,입력한password)
-      console.log(user결과)
 
-      /*-40)
-        error처리
-        DB에 ID가 없을때
-        DB에 ID가 있을때
-        DB에 ID가 있으면, input password == DB password 비교함
-
-        -50)
-        done: 3개의 argument를 가짐
-        done(서버에러, 성공시 사용자 db데이터, 에러 메시지)
-
-        -60)        
-        입력한 비밀번호를 암호화한 후 ,DB의 비밀번호와 비교해야함 (나중에 알아서 하세요)
-      */
-
-      if (err) { return done(err); }
-      if (!user결과) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
-      if (입력한password !== user결과.pw) { 
-         return done(null, false,{message: '비번 틀림'});
-      }
-      return done(null, user결과,{message:'성공'});
-
+  // 🍀passport
+  /*🍀-20)
+    passport.authenticate('local') : (인증해주세요)함수 ,    
+    인증 실패시 (failureRedirect : '/fail') :  '/login_fail' 로 연결 
+    인증 성공시 : res응답.redirect('/') 
+  */
+  app.post('/login', 
+    passport.authenticate('local', { failureRedirect: '/login_fail' }),
+    function(req, res) {
+      console.log('🦄c58. login')
+      res.redirect('/');
     });
-  }
-));
 
-// -70)
-// login 성공 때, id를 이용해서 session을 저장 (session의 id정보를 cookie로 보냄)
-// 👉f12 -> Application -> Cookies에서 확인
-passport.serializeUser(function(user정보, done) {
-  console.log(colors.bgYellow('passport.serializeUser'))
-  console.log(user정보)
 
-  done(null, user정보.id);
-});
+  // 🍀passport-local
+  // 🍀c60-30) passport.authenticate('local',~)...로그인 성공시, 다음코드 실행됨
+  passport.use(new LocalStrategy(
+    {
+    usernameField:'id',             // 👉login_c58.ejs
+    passwordField:'pw',            // 👉login_c58.ejs
+    session: true,                       // login 후 session을 저장할것인지?
+    passReqToCallback:false,
+    },
+    function(입력한username, 입력한password, done) {
+      db.collection('login').findOne({ id: 입력한username }, function (err, user정보) {
 
-// login 성공 때, 위의 session데이터를 가진사람(login한 유저)의 정보를 db에서 찾아줌
-// user정보 : db에서 찾은 정보
-passport.deserializeUser(function(id, done) {
+        console.log(colors.bgYellow('passport.use(new LocalStrategy'))            
+        console.log(입력한username,입력한password)
+        console.log(user정보)
 
-  console.log(colors.bgYellow('passport.deserializeUser'))
+        /*-40)
+          error처리
+          DB에 ID가 없을때
+          DB에 ID가 있을때
+          DB에 ID가 있으면, input password == DB password 비교함
 
-  User.findById(id, function (err, user정보) {
-    done(err, user정보);
+          -50)
+          done: 3개의 argument를 가짐
+          done(서버에러, 성공시 사용자 db데이터, 에러 메시지)
+
+          -60)        
+          입력한 비밀번호를 암호화한 후 ,DB의 비밀번호와 비교해야함 (나중에 알아서 하세요)
+        */
+
+        if (err) { return done(err); }
+        if (!user정보) { return done(null, false,{message:'존재하지않는 아이디입니다'}); }
+        if (입력한password !== user정보.pw) { 
+          return done(null, false,{message: '비번 틀림'});
+        }
+        return done(null, user정보,{message:'성공'});
+
+      });
+    }
+  ));
+
+  // -70)
+  // login 성공 때, id를 이용해서 session을 local에(?) 저장 (session의 id정보를 cookie로 보냄)
+  // 👉f12 -> Application -> Cookies에서 확인
+  passport.serializeUser(function(user정보, done) {
+    console.log(colors.bgYellow('passport.serializeUser'))
+    console.log(user정보)
+
+    done(null, user정보.id);
   });
-});
 
 
+  // 🦄c62
+  // 👉mypage.ejs
 
+  // 🍀 passport.deserializeUser
+  // login 성공 때, 위의 session데이터를 가진사람(login한 유저)의 정보를 db에서 찾아줌
+  // user정보 : db에서 찾은 정보
+  passport.deserializeUser(function(id, done) {
 
+    console.log(colors.bgYellow('passport.deserializeUser'))
 
-
-
-
-
-  // 🍀listen
-  app.listen(process.env.PORT, function () {
-      console.log(colors.bgBrightBlue('bgBrightBlue'))
-      console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
-      
+    User.findById(id, function (err, user정보) {
+      done(err, user정보);
+    });
   });
 
-  // cliend.close()있으면 post가 안됨..왜인지는 모름
-  // client.close();
+
+
+
+
+
+
+
+
+    // 🍀listen
+    app.listen(process.env.PORT, function () {
+        console.log(colors.bgBrightBlue('bgBrightBlue'))
+        console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
+        
+    });
+
+    // cliend.close()있으면 post가 안됨..왜인지는 모름
+    // client.close();
 });
 
 
