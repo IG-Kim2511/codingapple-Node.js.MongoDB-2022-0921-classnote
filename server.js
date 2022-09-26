@@ -391,7 +391,6 @@ MongoClient.connect(url, function(err, client) {
       collection().find().toArray()     : 여러개 찾을 때
     */
   app.get('/search_c68',(req,res)=>{
-
     
     // 🥒req.query 
     console.log(req.query)
@@ -401,7 +400,7 @@ MongoClient.connect(url, function(err, client) {
     // find({제목:req요청.query.value})  👉 문제점: 정확히 일치하는 것만 찾아줌
     db.collection('co0921').find({title:req.query.value}).toArray((p_err,p_db결과)=>{
       
-      console.log(colors.bgBrightMagenta('get./search'))
+      console.log(colors.bgBrightMagenta('get./search_c68'))
       console.log(p_db결과)
 
   
@@ -453,6 +452,7 @@ MongoClient.connect(url, function(err, client) {
 
     app.get('/search_c70',(req요청,res응답)=>{
 
+      console.log(colors.bgBrightMagenta('get./search_c70'))
       console.log(req요청.query.value)
       
       //70-20) .aggregate(검색조건).toArray()  
