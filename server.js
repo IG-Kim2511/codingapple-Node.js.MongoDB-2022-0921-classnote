@@ -55,11 +55,6 @@ app.get("/write", function (req, res) {
     res.render('write.ejs')
 });
 
-// 🥒c62
-app.get("/mypage", function (req, res) {
-    res.render('mypage_62.ejs')
-});
-
 
 
 
@@ -305,6 +300,23 @@ MongoClient.connect(url, function(err, client) {
       done(err, user정보);
     });
   });
+
+
+
+
+    // 🥒c62
+  app.get("/mypage",middleware로그인확인, function (req, res) {
+    res.render('mypage_62.ejs')
+  });
+
+  function middleware로그인확인(req,res,next) {
+  if (req.user) {
+    next()
+    
+  } else {
+    res.send('로그인 안했습니다.');    
+  }  
+  }
 
 
 
