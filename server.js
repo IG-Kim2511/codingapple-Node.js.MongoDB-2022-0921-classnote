@@ -57,6 +57,12 @@ app.get("/write", function (req, res) {
 
 
 
+  
+
+    
+
+
+
 
 // 🦄🦄c28 
 
@@ -275,7 +281,7 @@ MongoClient.connect(url, function(err, client) {
     }
   ));
 
-  // -70)
+  // 🍀passport.serializeUser
   // login 성공 때, id를 이용해서 session을 local에(?) 저장 (session의 id정보를 cookie로 보냄)
   // 👉f12 -> Application -> Cookies에서 확인
   passport.serializeUser(function(user정보, done) {
@@ -286,25 +292,18 @@ MongoClient.connect(url, function(err, client) {
   });
 
 
-  // 🦄c62
-  // 👉mypage.ejs
-
+  // 🦄c62,  👉mypage.ejs
   // 🍀 passport.deserializeUser
   // login 성공 때, 위의 session데이터를 가진사람(login한 유저)의 정보를 db에서 찾아줌
   // user정보 : db에서 찾은 정보
-  passport.deserializeUser(function(id, done) {
-
-    console.log(colors.bgYellow('passport.deserializeUser'))
-
-    User.findById(id, function (err, user정보) {
+  // p_id : passport.serializeUser에서의 use정보.id
+  passport.deserializeUser(function(p_id, done) {
+    db.collection('login').findOne({id:p_id}, function (err, user정보) {
       done(err, user정보);
     });
   });
 
-
-
-
-    // 🥒c62
+  // 🍀app.get("/mypage",~~~~), 
   app.get("/mypage",middleware로그인확인, function (req, res) {
     res.render('mypage_62.ejs')
   });
@@ -328,7 +327,7 @@ MongoClient.connect(url, function(err, client) {
 
     // 🍀listen
     app.listen(process.env.PORT, function () {
-        console.log(colors.bgBrightBlue('bgBrightBlue'))
+        console.log(colors.bgBrightMagenta('bgBrightMagenta'))
         console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
         
     });
