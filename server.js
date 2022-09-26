@@ -303,15 +303,17 @@ MongoClient.connect(url, function(err, client) {
     });
   });
 
-  // 🍀app.get("/mypage",~~~~), 
+  // 🍀62-50. app.get("/mypage",~~~~), 
   app.get("/mypage",middleware로그인확인, function (req, res) {
     res.render('mypage_62.ejs')
   });
 
+  //🥒62-50. middleware로그인확인
+  // req.user가 있으면 next() : 통과  👉app.get("/mypage",~~~~실행
+  // req.user가 없으면 html에 메시지 띄움
   function middleware로그인확인(req,res,next) {
   if (req.user) {
-    next()
-    
+    next()    
   } else {
     res.send('로그인 안했습니다.');    
   }  
