@@ -1,32 +1,29 @@
 /* 🦄 기본 수업준비 */
 
-body {
-    max-width: 1000px;
-  }
   
-  .title {
-    background-color: lightsteelblue;
-  }
-  
-  .overflow {
-    overflow: hidden;
-  }
-  .relative {
-    position: relative;
-  }
-  
-  .display-none {
-    display: none;
-  }
-  
-  .display-block {
-    display: block;
-  }
-  
-  .transforming {
-    transition: transform 0.5s;
-  }
-  
+.title {
+  background-color: lightsteelblue;
+}
+
+.overflow {
+  overflow: hidden;
+}
+.relative {
+  position: relative;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.transforming {
+  transition: transform 0.5s;
+}
+
   /* JS 36. C 33 */
   /*Global */
   
@@ -81,10 +78,12 @@ body {
   /* Universal tags */
   * {
     box-sizing: border-box;
+    text-align: center;
   }
   
   body {
     font-family: "Open Sans", sans-serif;
+    max-width: 1000px;
   }
   
   ul {
