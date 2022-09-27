@@ -509,24 +509,14 @@ MongoClient.connect(url, function(err, client) {
 
     //🦄🦄 72 회원 기능...게시판 기능, req.body._id, req.user._id 
     // 👉./views/register_c72.ejs
+    // 👉./views/list.ejs
     
     console.log('🦄🦄c72 ')
-    /* 
-      🍀
-      passport~~~ 코드 밑에
-
-      app.delete(~) 코딩
-
-
+    /*
       🍀(나중에 알아서 추가)
-      🍉id중복검사하고 저장하기 
-      🍉id에 알파벳, 숫자 잘 들어있나 검사하고 저장하기 
-      🍉비번 저장전에 암호화했나      
-
-      🍀
-      아이디 park으로, 아이디kim으로 아까 저장한 게시물 삭제해보기
-
-      👉ui로는 삭제되는데, 새로고침해보면 삭제안되고 그대로인걸 확인할 수 있음
+        🍉id중복검사하고 저장하기 
+        🍉id에 알파벳, 숫자 잘 들어있나 검사하고 저장하기 
+        🍉비번 저장전에 암호화했나     
     */
 
     app.get('/register_c72', (req요청,res응답)=>{
@@ -551,36 +541,55 @@ MongoClient.connect(url, function(err, client) {
 
     // 🍀write할때, 로그인 한 작성자도 추가하기 : passport~~~ 코드 밑에 코딩해야함
     // 👉write.ejs
-    app.post('/add_c72',function (req,res) {    
+    app.post('/add_c72',function (req요청,res) {    
       
       console.log((`app.post('/add_c72'`).bgBrightMagenta)  
-      console.log(req.body)
-      console.log(req.body.ig_title)
+      console.log(req요청.body)
+      console.log(req요청.body.ig_title)
 
       res.render('register_c72.ejs')
 
-      
 
+      /* 
+        🍀작성자: req요청.user._id        
+          req요청.user._id : 현재 로그인한 사람의 정보
+          req요청.user.pw  : 현재 로그인한 사람의 password
+      */
+      let 저장할것 = {작성자: req요청.user._id , title: req요청.body.ig_title, date:req요청.body.ig_data}
 
+      db.collection('co0921').insertOne(저장할것,function (p_err, p_db결과) {
 
-
-      // db.collection('counter').findOne({name:'total post count'},function (err,pp_res) {
-      //   console.log(pp_res)
-      //   console.log(pp_res.totalPost)
-        
-      //   db.collection('co0921').insertOne({_id:pp_res.totalPost+1,title: req.body.ig_title, date:req.body.ig_data },function (){
-      //     console.log('insertone success'.blue)      
-
-      //     db.collection('counter').updateOne({name:'total post count'},{$inc:{totalPost:1}},function (PPP_err,ppp_res) {
-      //       if (PPP_err) {
-      //         return console.log(PPP_err)            
-      //       }             
-      //     });
-      //   })
-      // });
-
-      
+        console.log('co0921-saved')        
+      })      
     })
+
+    
+    // 🍀delete, 실제 로그인 한 _id == 글에 저장된 _id 같을때만 삭제하기 : passport~~~ 코드 밑에 코딩해야함
+    // 👉./views/list.ejs
+
+    /* 
+      🍉아이디 park으로, 아이디kim으로 아까 저장한 게시물 삭제해보기
+      👉일단 화면에서 삭제되는데, 새로고침해보면 삭제안되고 그대로인걸 확인할 수 있음
+    */
+
+      app.delete('/delete_c72', function (req,res) {
+        
+        console.log(req.body)
+
+        req.body._id = parseInt(req.body._id);
+
+        // 🍉{_id:req.body._id, 작성자:req.user._id} 둘다 만족하는 게시물을 찾아서 delete해줌
+        let 삭제할데이터 = {_id:req.body._id, 작성자:req.user._id}
+
+        //🍉기존 c41에서의 코드와의 차이점 :  db.collection('co0921').deleteOne(req.body, function (pp_err, pp_res) {
+        db.collection('co0921').deleteOne(삭제할데이터, function (pp_err, pp_res) {
+            console.log('ig delete fin')
+
+          res.status(200).send({message:"ig delete fail"});
+        })
+        
+      });
+
 
 
 

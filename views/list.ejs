@@ -53,6 +53,8 @@
                 
               <!-- 🍀c42 -->
               <button class="myBtn delete" data-id="<%= ig_posts[i]._id %>">Delete</button>
+              
+              <button class="myBtn delete_c72" data-id="<%= ig_posts[i]._id %>">delete_c72</button>
 
                <!-- 🍀c48 href="http://localhost:3000/detail/<%= ig_posts[i]._id %>"-->
                
@@ -68,6 +70,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
+
+  // 🦄c41
     $('.delete').click((e)=>{           
 
         // 🍀44
@@ -88,6 +92,28 @@
         console.log( "Request failed: " + textStatus );   
         });
     });
+
+
+    // 🦄c72
+    $('.delete').click((e)=>{
+        $.ajax({
+          method: "DELETE",
+          url: "/delete_c72",
+          data: {_id: e.target.dataset.id}
+          
+        }).done(function() {
+          
+          $(this).parent('div').fadeOut();
+          location.reload();
+
+          console.log('ig delete success - list.js')
+        }).fail(function (jqXHR, textStatus) {                  
+
+        console.log('c44, delete-fail')
+        console.log( "Request failed: " + textStatus );   
+        });
+     });
+    
 
 
     //🦄🦄c66
