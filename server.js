@@ -17,6 +17,12 @@
   app.put('/update',function (req,res) {   })
 
   🍀
+    res.redirect('/list');
+
+  🍀
+    req.body.~
+
+  🍀
   .insertOne({},function (err,res) {})
   .updateOne({},function (err,res) {})
   .deleteOne({},function (err,res) {})
@@ -501,6 +507,41 @@ MongoClient.connect(url, function(err, client) {
     });
 
 
+    //🦄🦄 72 회원 기능...게시판 기능, req.body._id, req.user._id 
+    // 👉./views/register_c72.ejs
+    console.log('🦄🦄c72 ')
+    /* 
+      🍀
+      passport~~~ 코드 밑에
+
+      app.delete(~) 코딩
+
+      🍀
+      아이디 park으로, 아이디kim으로 아까 저장한 게시물 삭제해보기
+
+      👉ui로는 삭제되는데, 새로고침해보면 삭제안되고 그대로인걸 확인할 수 있음
+    */
+
+    app.get('/register_c72', (req요청,res응답)=>{
+      res응답.render('register_c72.ejs')
+
+    });
+    
+    //🍀register post하기 : passport~~~ 코드 밑에 코딩해야함
+    app.post('/register_post', (req요청,res응답)=>{
+      
+      console.log(colors.bgBrightMagenta('register_post'))
+      console.log(req요청.body.id)
+
+      // 🍉insertOne({id:req요청.body.id, pw:req요청.body.pw}, : post로 넘어온 req요청.body.~ 데이터 저장
+      db.collection('login').insertOne({id:req요청.body.id, pw:req요청.body.pw},function (p_err,p_db) {
+
+        // 🍉redirect
+        res응답.redirect('/'); 
+        
+      })
+
+    });
 
 
 
