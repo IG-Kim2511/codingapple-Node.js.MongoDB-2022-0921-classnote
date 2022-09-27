@@ -517,6 +517,10 @@ MongoClient.connect(url, function(err, client) {
         🍉id중복검사하고 저장하기 
         🍉id에 알파벳, 숫자 잘 들어있나 검사하고 저장하기 
         🍉비번 저장전에 암호화했나     
+
+        🍀
+        아이디 park으로, 아이디kim으로 아까 저장한 게시물 삭제해보기
+        👉ui로는 삭제되는데, 새로고침해보면 삭제안되고 그대로인걸 확인할 수 있음
     */
 
     app.get('/register_c72', (req요청,res응답)=>{
@@ -540,7 +544,7 @@ MongoClient.connect(url, function(err, client) {
 
 
     // 🍀write할때, 로그인 한 작성자도 추가하기 : passport~~~ 코드 밑에 코딩해야함
-    // 👉write.ejs
+    // 👉register_c72.ejs
     app.post('/add_c72',function (req요청,res) {    
       
       console.log((`app.post('/add_c72'`).bgBrightMagenta)  
@@ -586,11 +590,12 @@ MongoClient.connect(url, function(err, client) {
             console.log('ig delete fin')
 
           res.status(200).send({message:"ig delete fail"});
-        })
-        
+        })        
       });
 
 
+
+      
 
 
 
