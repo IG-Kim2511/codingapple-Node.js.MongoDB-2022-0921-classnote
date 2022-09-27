@@ -605,23 +605,20 @@ MongoClient.connect(url, function(err, client) {
       🍀
       https://expressjs.com/en/guide/routing.html
       
+      🍀routes : 너무 많은 app.get(~)을 1개의 파일로 묶어서 관리하기
     
     */
+    // 🍀 app.use(미들웨어)
+    // ./rountes/shop_c74.js 파일을 여기에 첨부
+    app.use('/', require('./routes/shop_c74.js'))
+    
+    
+    // /shop2
+    app.use('/shop2', require('./routes/shop2_c74.js'))
 
 
 
 
-
-
-
-      
-    // /* 
-    //   🍀routes : 너무 많은 app.get(~)을 1개의 파일로 묶어서 관리하기
-    // */
-
-    // // 🍀 app.use(미들웨어)
-    // // ./rountes/shop_c74.js 파일을 여기에 첨부
-    // app.use('/', require('./routes/shop_c74.js'))
 
     // // ./rountes/zoo_c74.js 파일을 여기에 첨부
     // // 미들웨어 함수 적용하는법 : ig_middleware
