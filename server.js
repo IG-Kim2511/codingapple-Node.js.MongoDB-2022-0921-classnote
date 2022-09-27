@@ -110,6 +110,7 @@ MongoClient.connect(url, function(err, client) {
   let db = client.db('db0921')
 
   // 🍀post, bodyParser
+  // 👉write.ejs
   app.post('/add',function (req,res) {    
     // res.send('/add, 전송완료')
     // res.sendFile(__dirname + "/write.html");
@@ -140,7 +141,6 @@ MongoClient.connect(url, function(err, client) {
         });
       })
     });
-
   })
   
   // list
@@ -509,12 +509,19 @@ MongoClient.connect(url, function(err, client) {
 
     //🦄🦄 72 회원 기능...게시판 기능, req.body._id, req.user._id 
     // 👉./views/register_c72.ejs
+    
     console.log('🦄🦄c72 ')
     /* 
       🍀
       passport~~~ 코드 밑에
 
       app.delete(~) 코딩
+
+
+      🍀(나중에 알아서 추가)
+      🍉id중복검사하고 저장하기 
+      🍉id에 알파벳, 숫자 잘 들어있나 검사하고 저장하기 
+      🍉비번 저장전에 암호화했나      
 
       🍀
       아이디 park으로, 아이디kim으로 아까 저장한 게시물 삭제해보기
@@ -537,17 +544,43 @@ MongoClient.connect(url, function(err, client) {
       db.collection('login').insertOne({id:req요청.body.id, pw:req요청.body.pw},function (p_err,p_db) {
 
         // 🍉redirect
-        res응답.redirect('/'); 
-        
+        res응답.redirect('/');         
       })
-
     });
 
 
+    // 🍀write할때, 로그인 한 작성자도 추가하기 : passport~~~ 코드 밑에 코딩해야함
+    // 👉write.ejs
+    app.post('/add_c72',function (req,res) {    
+      
+      console.log((`app.post('/add_c72'`).bgBrightMagenta)  
+      console.log(req.body)
+      console.log(req.body.ig_title)
+
+      res.render('register_c72.ejs')
+
+      
 
 
 
 
+      // db.collection('counter').findOne({name:'total post count'},function (err,pp_res) {
+      //   console.log(pp_res)
+      //   console.log(pp_res.totalPost)
+        
+      //   db.collection('co0921').insertOne({_id:pp_res.totalPost+1,title: req.body.ig_title, date:req.body.ig_data },function (){
+      //     console.log('insertone success'.blue)      
+
+      //     db.collection('counter').updateOne({name:'total post count'},{$inc:{totalPost:1}},function (PPP_err,ppp_res) {
+      //       if (PPP_err) {
+      //         return console.log(PPP_err)            
+      //       }             
+      //     });
+      //   })
+      // });
+
+      
+    })
 
 
 
@@ -558,7 +591,7 @@ MongoClient.connect(url, function(err, client) {
 
     // 🍀listen
     app.listen(process.env.PORT, function () {
-        console.log(colors.bgBrightMagenta('bgBrightMagenta'))
+        console.log((`bgBrightMagenta`).bgBrightMagenta)
         console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
         
     });
