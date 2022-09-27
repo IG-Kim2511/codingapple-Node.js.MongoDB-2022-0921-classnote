@@ -593,7 +593,7 @@ MongoClient.connect(url, function(err, client) {
 
 
 
-    //🦄🦄c74 router관리, router.get(주소, 미들웨어, 함수), router.use(미들웨어)
+    //🦄🦄c74 router(=app.get(~)묶음)관리, router.get(주소, 미들웨어, 함수), router.use(미들웨어)
     // 👉 ./routes/shop_c74.js
     // 👉 ./routes/zoo_c74.js
     
