@@ -149,7 +149,7 @@
   .navbar__logo i {
     color: orange;
   }
-  .navbar__menu {
+  .navbar__menu ul{
     display: flex;
     list-style: none;
     padding-left: 0;

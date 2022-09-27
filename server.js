@@ -593,20 +593,14 @@ MongoClient.connect(url, function(err, client) {
 
 
 
-
-
-
-
     //🦄🦄c74 router관리, router.get(주소, 미들웨어, 함수), router.use(미들웨어)
     // 👉 ./routes/shop_c74.js
     // 👉 ./routes/zoo_c74.js
     
-    /*
-      🍀
-      https://expressjs.com/en/guide/routing.html
+    /*🍀 app.get(~) 묶음 관리하기
+       routes : 너무 많은 app.get(~)을 1개의 파일로 묶어서 관리하기
       
-      🍀routes : 너무 많은 app.get(~)을 1개의 파일로 묶어서 관리하기
-    
+       🍀 https://expressjs.com/en/guide/routing.html
     */
 
     // 🍀 app.use(미들웨어)
@@ -624,12 +618,9 @@ MongoClient.connect(url, function(err, client) {
     // 🍉미들웨어 함수 적용하는법 : ig_middleware
     // ./rountes/zoo_c74.js 파일을 여기에 첨부
     
-    app.use('/zoo', ig_middleware,  require('./routes/zoo_c74.js'))
+    app.use('/zoo', require('./routes/zoo_c74.js'))
 
-    function ig_middleware(req,res,next) {
-      console.log('ig_middleware_c74')  
-    }
-
+ 
 
 
 

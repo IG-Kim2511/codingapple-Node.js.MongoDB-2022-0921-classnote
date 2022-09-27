@@ -10,11 +10,11 @@ const router = express.Router()
 //🍀server.js의 app.get과 같은뜻
 // 🍉 http://localhost:3000/shop/shirts 접속됨
 router.get('/shop/shirts', (req, res) => {
-    res.send('/shop/shirts')
+    res.send('c74, /shop/shirts')
 })
   
 router.get('/shop/pants', (req, res) => {
-    res.send('/shop/pants')
+    res.send('c74, /shop/pants')
 })
   
 
