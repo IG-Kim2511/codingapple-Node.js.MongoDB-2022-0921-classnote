@@ -64,7 +64,7 @@ app.use(methodOverride('_method'))
 
 
 
-// 🍀get, post, put, delete
+// 🍀route : get, post, put, delete
 
 // 🍀get
 app.get("/", function (req요청, res응답) {
@@ -595,7 +595,7 @@ MongoClient.connect(url, function(err, client) {
 
 
 
-      
+
 
 
 
