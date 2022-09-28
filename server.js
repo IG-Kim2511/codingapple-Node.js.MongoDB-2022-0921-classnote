@@ -621,17 +621,18 @@ MongoClient.connect(url, function(err, client) {
     app.use('/zoo', require('./routes/zoo_c74.js'))
 
         
-    // 🦄🦄c76 Google Cloud(=AWS, 네이버클라우드, cafe24) 사이트배포, app.yaml
+    // 🦄🦄c76 Google Cloud(=AWS) 사이트배포, app.yaml
     // 👉노트필기 필수 참고
     // 👉app.yaml
+    // 👉Google Cloud - App Engine - dash board
 
     /* 
       🍀2. server.js에 서버를 띄울 때 포트가 8080인지 확인합니다.
         Google cloud default port : 8080      
 
-      🍀gcloud init
-
-      🍀gcloud app deploy
+      🍀명령어
+        gcloud init
+        gcloud app deploy
     */
 
 
