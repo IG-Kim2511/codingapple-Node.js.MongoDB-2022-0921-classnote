@@ -9,20 +9,13 @@
 </head>
 <body>       
 
-    <!-- 🍀c50 include, 
-      ejs include는 comment에 있는 코드도 읽어버림. 
-      조심하자
-    -->
     <%- include('./nav_c50.html') %>  
    
     <h1 class="title-page">./views/list.ejs</h1>
 
       <br><br>
 
-      <!-- 👉🦄c66 -->
-      <!-- 👉하단의 js코드 -->
-      <div>
-        <!-- id="search-input", id="search" -->
+
         <p>c66 간단 search</p>
         <input type="text" id="search-input">
         <button id="search" class="myBtn">search</button>
@@ -38,30 +31,28 @@
           <p>할일 마감날짜 : <%= ig_posts[0].date %></p>
           
           <br><br>
-          <h2>🍀c34 반복문</h2>
-          <!-- 🦄c34 반복문     <%  %>   
-              for (let i = 0; i < array.length; i++) {
-                 array[i];              
-              }        
-          -->
+          <h2>🍀c34 반복문, 🍀reverse.forEach </h2>
+
+          <!-- 🦄c34. 🍀reverse.forEach적용하기 -->
           
-        <%    for (let i = 0; i < ig_posts.length; i++) {   %>  
-          <div class="list">
-              <h2>id: <%= ig_posts[i]._id %></h2>
-              <h2>할일 제목 : <%= ig_posts[i].title %></h2>
-              <p>할일 마감날짜 : <%= ig_posts[i].date %></p> 
+          <% ig_posts.slice().reverse().forEach(function(item) {     %>  
+            <div class="list">
+              <h2>id: <%= item._id %></h2>
+              <h2>할일 제목 : <%= item.title %></h2>
+              <p>할일 마감날짜 : <%= item.date %></p> 
               
               <!-- 🍀c42 -->
-              <button class="myBtn delete" data-id="<%= ig_posts[i]._id %>">Delete</button>
+              <button class="myBtn delete" data-id="<%= item._id %>">Delete</button>
               
-              <button class="myBtn delete_c72" data-id="<%= ig_posts[i]._id %>">delete_c72</button>
-
-              <!-- 🍀c48 href="http://localhost:3000/detail/<%= ig_posts[i]._id %>"-->
+              <button class="myBtn delete_c72" data-id="<%= item._id %>">delete_c72</button>
+      
+              <!-- 🍀c48 href="http://localhost:3000/detail/<%= item._id %>"-->
               
-              <a class="myBtn detail"  data-id="<%= ig_posts[i]._id %>" href="/detail/<%= ig_posts[i]._id %>">Detail page</a>
-              
-          </div>
-          <%  }  %>  
+              <a class="myBtn detail"  data-id="<%= item._id %>" href="/detail/<%= item._id %>">Detail page</a>              
+            </div>
+          <%  })  %>  
+          
+    
 
         
 
@@ -119,37 +110,9 @@
 
     //🦄🦄c66
     //🍀c66-10). search기능 만들기, query string 만듬 (Query string parameters)
-      /* 🍄
-        -2) search btn click,       
-
-        -6) ejs -> server.js로  데이터 보냄 끝 
-
-          6-a) POST요청으로 기능만들기. 끝
-          
-          6-b) GET요청으로 만들어보기  👉 이제부터 할 코드 👉 "Query string parameters"사용함
-      */
-
-      /* 🍉Query string parameters
-      
-           `/~ㄴ~?~ㄱ~`
-
-           `/~ㄴ~?value=${~ㄱ~}`
-
-          버튼 클릭, ㄱ을 ㄴ서버로 get요청 , 
-      */
-
 
     // 🍉
-      $('#search').click(function () {
-        
-           //🥒 window.location.replace('/search') : 버튼 클릭, /search로 이동함 = app.get(~)과 비슷함
-          // 👉server.js.... app.get('/search',~ ) 로 연결됨
-          // window.location.replace('/search')
-
-
-          // 🥒 $('#search-input').val() : input value 
-          // 🥒 Query string parameters: `/~~?value=${~~~~}`
-          
+      $('#search').click(function () {          
           var ig_search_input값 = $('#search-input').val()
 
           window.location.replace(`/search_c68?value=${ig_search_input값}`)        

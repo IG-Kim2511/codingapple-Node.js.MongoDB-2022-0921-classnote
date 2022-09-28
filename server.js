@@ -31,6 +31,12 @@
   .findOne({},function (err,res) {})
   .find({title:req.query.value}).toArray((err,db결과)=>{ })
 
+
+
+  🍀Google cloud 명령어
+    gcloud init
+    gcloud app deploy
+
 */
 
 const express = require("express");
@@ -141,7 +147,7 @@ MongoClient.connect(url, function(err, client) {
     });
   })
   
-  // list
+  // 🍀c34. list
   app.get("/list", function (req, res) {
 
     // find().toArray()
@@ -154,6 +160,23 @@ MongoClient.connect(url, function(err, client) {
     })
 
   });
+
+  // 🍀c34-2. list-reverse
+  app.get("/list-reverse_c34", function (req, res) {
+
+    // find().toArray()
+    db.collection('co0921').find().toArray(function (err,pp_res) {
+      console.log(pp_res)
+      
+      // ejs
+      //res.render
+      res.render('list-reverse_c34.ejs',{ig_posts:pp_res});
+    })
+
+  });
+
+
+
 
 
   // 🍀c42, delete
@@ -621,7 +644,7 @@ MongoClient.connect(url, function(err, client) {
     app.use('/zoo', require('./routes/zoo_c74.js'))
 
         
-    // 🦄🦄c76 Google Cloud(=AWS) 사이트배포, app.yaml
+    // 🦄🦄c76 Google Cloud(=AWS) 사이트배포, app.yaml, gcloud init, gcloud app deploy
     // 👉노트필기 필수 참고
     // 👉app.yaml
     // 👉Google Cloud - App Engine - dash board
@@ -636,9 +659,21 @@ MongoClient.connect(url, function(err, client) {
     */
 
 
+    // 🦄🦄c78 이미지 업로드 & api만들기, enctype="", multer, upload.array(~,~)
+    // 👉views/upload_c78.ejs
 
 
 
+
+
+
+
+
+
+
+
+
+      
 
 
 
