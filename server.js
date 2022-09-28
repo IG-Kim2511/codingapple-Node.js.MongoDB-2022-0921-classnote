@@ -769,14 +769,42 @@ MongoClient.connect(url, function(err, client) {
 
 
 
+    // 🦄🦄80 라이브러리 소개 helmet.js , Mongoose, Connect-mongo, OAuth소셜로그인
+    /* 
+      보안 : helmet.js 라이브러리 
+      ex) express사용하고있다는 정보...숨겨줄 필요가 있음
+
+      Mongoose : mongodb 데이터저장할때 검사도와줌
+
+      OAuth소셜로그인 
+      Connect-mongo : 세션데이터..db저장  ...사용하면 속도 안느려지고 좋음
+    */
 
 
+    //🦄🦄82, 84, 86 웹소켓으로 채팅서비스 만들기 1 (Socket.io)
+    
 
+    // 🦄🦄88 Node서버+ React 합치기, app.get("*",~), 리액트 router사용, proxy 라이브 코딩
 
+    /*   
+        리액트 라우터에서 다 해결해주므로, 서버의 역할을  db연결만으로 축소시킬수있음
 
+        일반 자바스크립트 페이지 보다가,
+        특정페이지 들어갔을때, 리액트 페이지 보여주는 법
 
+        "/" 접속 : 자바스크립트 html페이지 보여줌
+        "/react"접속 :  리액트 페이지 보여줌
 
-      
+        미들웨어 : 서버의 요청과 응답사이에 실행할 코드 , 
+        유저가 /~~url로 요청시, 응답하기전에 실행할 코드
+
+        "homepage" :"~~" 추가한 후 
+        npm run build
+
+        계속 중간에 멈추고 build를 해야하는가??
+        ㄴㄴ, 라이브로 가능함
+        proxy 검색
+    */
 
 
 
