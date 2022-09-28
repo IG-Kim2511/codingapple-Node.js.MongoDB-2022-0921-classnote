@@ -250,11 +250,9 @@ MongoClient.connect(url, function(err, client) {
   // 🦄🦄c60 (회원 로그인2) passport-local, passport.serializeUser(~), bcryptjs
   // 🦄🦄c62 (회원 로그인3) mypage.ejs, middleware로그인확인, passport.deserializeUser, req.user: db의 데이터
   // 👉mypage.ejs
-
-  console.log('🦄🦄c56,58,60,62')
-
   // 👉login_c58.ejs
 
+  console.log('🦄🦄c56,58,60,62')
 
   // 🍀c58-10)
   // passport
@@ -663,6 +661,9 @@ MongoClient.connect(url, function(err, client) {
         
     // 🦄🦄c78 이미지 업로드 & api만들기, enctype="", multer, upload.array(~,~)
     // 👉views/upload_c78.ejs
+    // 👉./public/image_c78
+
+    // ?? 왜 local publilc/image/~ 폴더에 저장하는지 이해 못했음. DB에 저장해야 API로 사용할수있는것 아닌가?
 
 
     /* 
@@ -674,8 +675,7 @@ MongoClient.connect(url, function(err, client) {
     });
 
     /* 
-      🍀-20_
-          npm install multer
+      🍀-20) npm install multer
 
           diskStorage : 컴퓨터 하드안에 저장
           memoryStorage : 램안에 저장. 휘발성..저장
@@ -685,9 +685,9 @@ MongoClient.connect(url, function(err, client) {
     // 🍉diskStorage
     const storage = multer.diskStorage({
 
-      // 🍉경로 : './public_c50/image_c78'
+      // 🍉경로 : './public/image_c78'
       destination: function (req, file, cb) {
-        cb(null, './public_c50/image_c78')
+        cb(null, './public/image_c78')
       },
 
       // 🍉file name 설정 : file.originalname
@@ -755,7 +755,7 @@ MongoClient.connect(url, function(err, client) {
           적용 👉 req요청.params.ig_imageName
 
 
-        b) 파일경로 : __dirname +'/public_c50/image_c78'
+        b) 파일경로 : __dirname +'/public/image_c78'
 
 
         c) html에 img태그에 적용하기 (파일명 :   test_c78.jpg)
@@ -764,7 +764,7 @@ MongoClient.connect(url, function(err, client) {
     */
 
     app.get('/image_c78/:ig_imageName',(req요청,res응답)=>{
-      res응답.sendFile(__dirname +'/public_c50/image_c78'+ req요청.params.ig_imageName)
+      res응답.sendFile(__dirname +'/public/image_c78'+ req요청.params.ig_imageName)
     })
 
 
