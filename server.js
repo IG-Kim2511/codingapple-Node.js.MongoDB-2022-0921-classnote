@@ -659,10 +659,113 @@ MongoClient.connect(url, function(err, client) {
     */
 
 
+  
+        
     // 🦄🦄c78 이미지 업로드 & api만들기, enctype="", multer, upload.array(~,~)
     // 👉views/upload_c78.ejs
 
 
+    /* 
+      🍀-10) upload.ejs 만듬 : 👉views/upload_c78.ejs
+    */
+
+    app.get('/upload',(req요청,res응답)=>{
+      res응답.render('upload_c78.ejs');
+    });
+
+    /* 
+      🍀-20_
+          npm install multer
+
+          diskStorage : 컴퓨터 하드안에 저장
+          memoryStorage : 램안에 저장. 휘발성..저장
+    */
+    const multer = require('multer')
+
+    // 🍉diskStorage
+    const storage = multer.diskStorage({
+
+      // 🍉경로 : './public_c50/image_c78'
+      destination: function (req, file, cb) {
+        cb(null, './public_c50/image_c78')
+      },
+
+      // 🍉file name 설정 : file.originalname
+      filename: function (req, file, cb) {
+
+
+        /* 🍉파일명 추가로 넣기      
+          a) 
+          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+          cb(null, file.originalname + '-' + uniqueSuffix)    
+
+          b) 
+          cb(null, file.originalname + '날짜:' + new Date())    
+        */
+        cb(null, file.originalname)
+        
+      }
+    })
+
+    // 🍉const upload : 모든설정...const upload에 저장함. const multer , const storage 가져옴
+
+    const upload = multer({
+      storage: storage,
+
+      /* 
+        // 🍉fileFilter : PNG, JPG만 업로드하기
+        fileFilter: function (req, file, callback) {
+            var ext = path.extname(file.originalname);
+            if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+                return callback(new Error('PNG, JPG만 업로드하세요'))
+            }
+            callback(null, true)
+        },
+
+        // 🍉limits : 파일사이즈 제한
+        limits:{
+            fileSize: 1024 * 1024
+        }
+      */
+    });
+
+
+    /* 
+      🍀-30
+          upload.ejs에서 post요청오면
+
+          ./public/image폴더안에 저장함
+    */
+
+    /* 
+      🍉미들웨어 const upload : upload.single('ig_uploadInput')
+      🍉./views/upload.ejs의  <input type="file" name="ig_uploadInput"> 의 name="ig_uploadInput"가져옴
+    */
+    app.post('/upload',upload.single('ig_uploadInput'),(req요청,res응답)=>{
+      res응답.send('c78_fin');
+    });
+
+    /* 
+      🍀-40 API만들기 (업로드한 이미지... API로 만들기)
+
+      🍉URL파라미터 
+      
+        a) 이름짓기👉 :ig_imageName
+
+          적용 👉 req요청.params.ig_imageName
+
+
+        b) 파일경로 : __dirname +'/public_c50/image_c78'
+
+
+        c) html에 img태그에 적용하기 (파일명 :   test_c78.jpg)
+        👉upload_c78.ejs
+        <img src="/public_c50/image_c78/test_c78.jpg" alt="">
+    */
+
+    app.get('/image_c78/:ig_imageName',(req요청,res응답)=>{
+      res응답.sendFile(__dirname +'/public_c50/image_c78'+ req요청.params.ig_imageName)
+    })
 
 
 
