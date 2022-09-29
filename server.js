@@ -426,13 +426,13 @@ MongoClient.connect(url, function(mongo_err, client) {
 
 
     // 🍀c38.findOne, total count    
-  // .collecton(~) : ....'~' 에 연결, collecton이름 여기에 작명하면, mongoDB에 자동으로 그 collecton 만들어짐
-  // .insertOne(~) : .insertOne(저장할 데이터, 그 이후 실행할 콜백함수)  👉 mongoDB에 가면 저장된 데이터 확인됨
+    // .collecton(~) : ....'~' 에 연결, collecton이름 여기에 작명하면, mongoDB에 자동으로 그 collecton 만들어짐
     db.collection('counter').findOne({name:'total post count'},function (p_err,pp_res) {
       console.log(pp_res)
       console.log(pp_res.totalPost)
       
-        // 🍀insertOne, _id: pp_res.totalPost+1
+      // 🍀insertOne, _id: pp_res.totalPost+1
+      // .insertOne(~) : .insertOne(저장할 데이터, 그 이후 실행할 콜백함수)  👉 mongoDB에 가면 저장된 데이터 확인됨
       db.collection('co0921').insertOne({_id:pp_res.totalPost+1,title: req.body.ig_title, date:req.body.ig_data },function (){
         console.log('insertone success'.blue)      
 
