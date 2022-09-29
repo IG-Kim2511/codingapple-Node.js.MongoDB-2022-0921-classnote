@@ -663,7 +663,7 @@ MongoClient.connect(url, function(err, client) {
     // 👉views/upload_c78.ejs
     // 👉./public/image_c78
 
-    // ?? 왜 local publilc/image/~ 폴더에 저장하는지 이해 못했음. DB에 저장해야 API로 사용할수있는것 아닌가?
+    // 🍚 ?? 왜 local publilc/image/~ 폴더에 저장하는지 이해 못했음. DB에 저장해야 API로 사용할수있는것 아닌가?
 
 
     /* 
@@ -692,7 +692,8 @@ MongoClient.connect(url, function(err, client) {
 
       // 🍉file name 설정 : file.originalname
       filename: function (req, file, cb) {
-
+        console.log((`multer-filename-file`).bgBrightMagenta)
+        console.log(file)
 
         /* 🍉파일명 추가로 넣기      
           a) 
@@ -739,7 +740,7 @@ MongoClient.connect(url, function(err, client) {
 
     /* 
       🍉미들웨어 const upload : upload.single('ig_uploadInput')
-      🍉./views/upload.ejs의  <input type="file" name="ig_uploadInput"> 의 name="ig_uploadInput"가져옴
+      👉./views/upload.ejs의  <input type="file" name="ig_uploadInput"> 의 name="ig_uploadInput"가져옴
     */
     app.post('/upload',upload.single('ig_uploadInput'),(req요청,res응답)=>{
       res응답.send('c78_fin');
