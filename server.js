@@ -384,13 +384,30 @@ app.get("/write", function (req, res) {
   8-4) 이 서버 연결해주셉
 */
 
+// 🦄🦄c30 Database에 자료 저장하기, client.db('작명').collection('작명').insertOne(자료오브젝트, 콜백함수)
+//👉상단배치 const MongoClient = require('mongodb').MongoClient;
+
+console.log('🦄🦄c30')
+
+/* 
+  1) mongoDB 사이트 
+  clusters ->collection -> database는 하나의 폴더, collection은 하나의 엑셀파일이라고 생각하면 딱 맞습니다. 
+
+  2)🍀😎uri : iikim2522:dRT2GRSjF5PoHsam : 비밀번호 랜덤생성했을때 접속성공함 ,
+  🍉auto generate password 
+   home 👉 Projects 👉 Security 👉Quickstart에서 username edit선택하고 auto generate password 클릭 (가끔 quick start안나올때 있는데, home에서부터 넘어오면 생김 )
+  https://cloud.mongodb.com/v2/62be0862fda87151be53eb94#setup/access
+  비밀파일에 숨겨야함. 해킹될수있음, 연습때는 연습끝날때마다 비밀번호 새로 생성
+*/
+
+
 
 // url, password
 let url = process.env.mongoDB_url;
 
-MongoClient.connect(url, function(err, client) {
-  if (err) throw err;
-  console.log("ig-Database created!");
+MongoClient.connect(url, function(mongo_err, client) {
+  if (mongo_err) throw mongo_err;
+  console.log((`ig-Database created!`).bgBrightMagenta)
 
   let db = client.db('db0921')
 
@@ -408,8 +425,10 @@ MongoClient.connect(url, function(err, client) {
     console.log(req.body.ig_title)
 
 
-    // 🍀c38.findOne, total count
-    db.collection('counter').findOne({name:'total post count'},function (err,pp_res) {
+    // 🍀c38.findOne, total count    
+  // .collecton(~) : ....'~' 에 연결, collecton이름 여기에 작명하면, mongoDB에 자동으로 그 collecton 만들어짐
+  // .insertOne(~) : .insertOne(저장할 데이터, 그 이후 실행할 콜백함수)  👉 mongoDB에 가면 저장된 데이터 확인됨
+    db.collection('counter').findOne({name:'total post count'},function (p_err,pp_res) {
       console.log(pp_res)
       console.log(pp_res.totalPost)
       
