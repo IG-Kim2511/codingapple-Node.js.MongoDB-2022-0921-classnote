@@ -20,11 +20,12 @@
       <br><br>
 
       <!-- 👉🦄c66 -->
-      <!-- 👉하단의 js코드 -->
       <div>
         <!-- id="search-input", id="search" -->
         <p>c66 간단 search</p>
         <input type="text" id="search-input">
+
+         <!-- 👉js 66 -->
         <button id="search" class="myBtn">search</button>
       </div>
       
@@ -52,8 +53,10 @@
               <p>할일 마감날짜 : <%= ig_posts[i].date %></p> 
               
               <!-- 🍀c42 -->
+              <!-- 👉js 42 -->
               <button class="myBtn delete" data-id="<%= ig_posts[i]._id %>">Delete</button>
               
+              <!-- 👉js 72 -->
               <button class="myBtn delete_c72" data-id="<%= ig_posts[i]._id %>">delete_c72</button>
 
               <!-- 🍀c48 href="http://localhost:3000/detail/<%= ig_posts[i]._id %>"-->
@@ -109,8 +112,8 @@
     });
 
 
-    // 🦄c72
-    $('.delete').click((e)=>{
+    // 🦄c72. 로그인한사람의 id와 write한 사람의 id가 같아야만 delete가능
+    $('.delete_c72').click((e)=>{
         $.ajax({
           method: "DELETE",
           url: "/delete_c72",

@@ -256,7 +256,7 @@ app.get("/", function (req요청, res응답) {
 
   //🦄c50. ejs : html과 달리 render(~) 라는거 헷갈리지 말기
   // 👉index.ejs
-  
+
   // 🍉{ig_title:req요청.params.id}
   res응답.render('index.ejs',{ig_title:req요청.params.id})
 
@@ -1271,7 +1271,7 @@ MongoClient.connect(url, function(mongo_err, client) {
 
     // 👉🍀c18, listen
     app.listen(process.env.PORT, function () {
-        console.log((`bgBrightMagenta`).bgBrightMagenta)
+        console.log((`bgBrightMagenta`).bgBrightGreen)
         console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
         
     });
