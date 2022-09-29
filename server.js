@@ -592,12 +592,32 @@ MongoClient.connect(url, function(mongo_err, client) {
   });
 
 
+  // 🦄🦄c48 상세페이지를 만들어보자 id (URL parameter), req요청.params.id
+  // 👉/views/detail.ejs
+  
+  /* 
+    🍀목표: /detail로 접속하면 detail.ejs 보여주기 
 
-  // 🍀c48. 👉/views/detail.ejs
+    -2) :id : URL parameter
+    = req요청.params.id  = 'detail/:id'
 
+    -4)findOne({~},function(){}) : {~}가 있는 오브젝트 뭉치를 찾아줌
+
+    -6) parseInt() :  db의 id는 int인데, 코드를 확인하면 string으로 나옴 -> parseInt()붙여서 number로 만듬
+    팁: 마우스를 hover하면 JavaScript type을 알려줌
+
+    -8).render('~c~',{ ~b~ : ~a~ }) : ~a~데이터를, ~b~이름으로,  ~c~~로 보냄,
+  */
+  // :id
   app.get('/detail/:id',function (req,res) {
+
+    //  req요청.params.id 
+    // findOne({~},function(){})
+    // parseInt 
     db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err,p_res) {
       console.log(p_res)
+
+      // .render('~c~',{ ~b~ : ~a~ })
       res.render('detail.ejs',{ig_data: p_res})      
     });    
   });
