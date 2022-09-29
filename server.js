@@ -493,6 +493,7 @@ MongoClient.connect(url, function(mongo_err, client) {
           https://www.mongodb.com/docs/manual/reference/operator/update/
         */
 
+        // 🦄🦄 40 게시물마다 id넣기2 - id에 +1하기, updateOne(.), mongodb operator $inc $set 
         // 🍀c40.updateOne, $inc:{totalPost:1}
         db.collection('counter').updateOne({name:'total post count'},{$inc:{totalPost:1}},function (PPP_err,ppp_res) {
           if (PPP_err) {
@@ -556,19 +557,36 @@ MongoClient.connect(url, function(mongo_err, client) {
   });
 
 
+  // 🦄🦄c42 AJAX로 DELETE 요청하기1, $.ajax(.), app.delete('delete',(.)={})
+  // 🦄🦄c44 AJAX로 DELETE 요청하기2, deleteOne(.), data-~~, .dataset.~~, parseInt(.)
+  // 🦄🦄c46 AJAX로 DELETE 요청하기3, jQuery기능 .status(~).send(~)
+  console.log('🦄🦄c42,44,46')
 
-
+  //c44) 🍄req요청.body에 담겨온 id를 가진 오브젝트를 db에서 찾아서, 삭제
+  // 👉./views/list.ejs
 
   // 🍀c42, delete
   app.delete('/delete', function (req,res) {
     
+    console.log(`delete`.bgBrightMagenta)
     console.log(req.body)
 
+    /*🍀
+      "req요청.body.~id"를 number로 바꿈  -> "req요청.body"를 deleteOne()에 사용함. 
+      ("req요청.body._id"  가 아니라. "req요청.body") 
+    */
     req.body._id = parseInt(req.body._id);
+
+    // ~.deleteOne()
     db.collection('co0921').deleteOne(req.body, function (pp_err, pp_res) {
          console.log('ig delete fin')
 
+      // c46-30) 성공코드 200:  res응답.status(200).send({message : "c46, success"});  
+      // 👉 list.ejs
       res.status(200).send({message:"ig delete fail"});
+
+      // c46-40) 실패코드 400:  res응답.status(400).send({message : "c46, fail"});        
+      // res응답.status(400).send({message : "c46, fail"});
     })
     
   });
