@@ -256,7 +256,9 @@ app.get("/", function (req요청, res응답) {
 
   //🦄c50. ejs : html과 달리 render(~) 라는거 헷갈리지 말기
   // 👉index.ejs
-  res응답.render('index.ejs')
+  
+  // 🍉{ig_title:req요청.params.id}
+  res응답.render('index.ejs',{ig_title:req요청.params.id})
 
 });
 
@@ -317,7 +319,8 @@ app.get("/write", function (req, res) {
     //res.send('ig node server')
     // res.sendFile(__dirname + "/write.html");
 
-    res.render('write.ejs')
+    res.render('write.ejs',{ig_title:req.params.id})
+    
 });
 
 
@@ -618,7 +621,7 @@ MongoClient.connect(url, function(mongo_err, client) {
       console.log(p_res)
 
       // .render('~c~',{ ~b~ : ~a~ })
-      res.render('detail.ejs',{ig_data: p_res})      
+      res.render('detail.ejs',{ig_data: p_res, ig_title:req.params.id})      
     });    
   });
 
