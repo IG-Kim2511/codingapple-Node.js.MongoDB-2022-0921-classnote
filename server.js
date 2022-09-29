@@ -1,10 +1,25 @@
 
 
-/* 
-  🦄🦄🦄ig 정리 : 자주쓰는 node.js, mongoDB 문법
+/* 🦄🦄🦄npm , terminal  명령어
+   
+  🍀npm
+  npm install -g nodemon  
+  npm install mongodb  
 
+  🍀terminal  명령어
+  서버 끄기 : terminal에서 ctrl + c
+
+  node server.js
+  nodemon server.js 
+*/
+/* 
+  🦄🦄🦄자주쓰는 node.js, mongoDB 문법,
 
   🍀
+  app.listen(3000, function(){ } )
+  
+
+  
   app.get("/", function (req요청, res응답) {
     res응답.render('index.ejs')
     res.sendFile(__dirname + "/style.css");
@@ -39,42 +54,204 @@
 
 */
 
+
+
+
+/* 🍀 Server.js 상단 코드 */
+
+// c18 express
+// require(~) : ~파일, ~라이브러리을 가져와서(import) 쓰겠다는 뜻
 const express = require("express");
 const app = express();
 
 // colors
 let colors = require("colors");
 
-//bodyParser 
+// c24-5) bodyParser
 let bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // dotenv
 require('dotenv').config()
 
-// mogoClient
+// c30) mogoClient
 let MongoClient = require('mongodb').MongoClient;
 
-// ejs
+ // c32) ejs
 // let ejs = require('ejs'); 👉documnet에 있는 사용법인데 아직 이해못했음
 app.set('view engine','ejs')
 
 // c50) static 파일 보관위해 public폴더 씀. html에서 경로설정할 때 root폴더에 보관된 것처럼 경로 설정함
 app.use(express.static('public'))
 
-// method-override
+// c52)  method-override
 let methodOverride = require('method-override')
 app.use(methodOverride('_method'))
+
+/* 
+  🍀me - next 수업에 나올 상단 코드 정리
+
+  // c30)
+  const MongoClient = require('mongodb').MongoClient;
+
+  // c32) 
+  app.set('view engine', 'ejs');
+
+  // c50)  static 파일 보관위해 public폴더 쓸거라는 뜻
+  app.use('/public_c50', express.static('public_c50'));
+
+  // c52)  method-override
+  var methodOverride = require('method-override');
+  const passport = require('passport');
+  app.use(methodOverride('_method'))
+
+  // 🍀c58-10)
+  // const passport = require('passport');
+  const LocalStrategy = require('passport-local').Strategy;
+  const session = require('express-session');
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(session({ secret: 'ingyum123', resave: true, saveUninitialized: false }));
+
+
+  // c64) .env 파일, environment variable, 
+  // root folder에 .env파일 만들때 : require('dotenv').config()
+  // 다른 folder(env_c64)에 .env파일 만들때 : require('dotenv').config({path: "./env_c64/.env"})
+  require('dotenv').config({path: "./env_c64/.env"})
+*/
+
+
+// 🦄🦄me- terminal 명령어, 파일위치 정리 (👉codingapple-Node.js.MongoDB-2022-0629-classnote폴더...server.js)
+/* 
+  🦄🦄c12 express 라이브러리 설치
+        $npm init
+        $npm install express
+
+  🦄🦄c14 미리보기
+  node server.js
+
+  서버 끄기 : ctrl +c
+
+  🦄🦄c18 nodemon 자동 미리보기
+  $npm install -g nodemon (yarn add global nodemon)
+
+  $nodemon server.js 
+
+  🦄🦄c24 body-parser 라이브러리 설치
+  $npm install body-parser 혹은 yarn add body-parser
+
+
+  🦄🦄c28 mongodb 라이브러리 설치        
+  npm install mongodb
+
+  🦄🦄c32 EJS 
+  👉./views/~~.ejs
+  npm install ejs
+
+  🦄🦄c52 method-override
+  npm install method-override
+
+  🦄🦄c58 passport, passport-local, express-session,
+  npm install passport, passport-local, express-session
+
+  🦄🦄c64 dot env
+  👉./env_c64/.env
+  npm install dotenv
+
+  🦄🦄c74 router관리, router.get(주소, 미들웨어, 함수), router.use(미들웨어)
+  👉 ./routes/shop_c74.js
+  👉 ./routes/zoo_c74.js
+
+
+  🦄🦄c76
+  👉app.yaml
+  🍀gcloud init
+  🍀gcloud app deploy
+
+
+  🦄🦄c78
+  👉./public/image
+   npm install multer
+        
+*/
+
+/* 🦄🦄 참고  
+  w3school - node.js
+    
+  https://www.mongodb.com/docs/manual/reference/method/db.collection.aggregate/
+
+  npmjs.com    
+*/
+
+
+
+/* 🦄🦄me- 에러해결 
+  10) 접속이 안됨... :   비밀번호 랜덤생성했을때 접속성공함
+
+  20) 코드는 다 맞고, console.log에도 데이터 제대로 다 적용이 됬는데, mongodb사이트에는 안보임 : 그냥 mongodb사이트 재로그인해서 해결
+*/
+
+
+// 🦄🦄c16 npm에러해결, package.json, npm init, npm install express(Node.js, Express라이브러리 설치)
+console.log('🦄🦄🦄🦄c5')
+
+/* 
+  2)
+  npm
+  package.json
+
+  4) 터미널 명령어
+  $npm init
+  $npm install express
+*/
+
+// 🦄🦄c18 express로 서버오픈공식, node server.js, listen, get(주소, (req,res)={} ), send('글자')
+// 👉 server.js 상단 -  (express) 서버오픈 기본공식  
+// 👉하단 코드 - listen(~)
+
+/*
+
+  2) 👉 server.js 상단에 코드 추가, express 라이브러리 첨부와 사용 
+
+  4) app.listen()은 원하는 포트에 서버를 오픈하는 문법이라고 보시면 됩니다. 
+  listen() 함수 안엔 두개의 파라미터가 필요합니다. 
+  listen(서버를 오픈할 포트번호, function(){서버 오픈시 실행할 코드})
+
+  5) 8080포트 쓰면 편함 - 구글 클라우드서비스 디폴트값 👉 c76
+
+  6) node server.js / localhost:3000
+
+  터미널에서 node server.js를 입력하면 서버가 뜹니다.
+  브라우저에서 localhost:3000  접속하면 확인가능합니다. 
+
+  8) 서버 끄기 
+  terminal에서 ctrl + c
+
+  10) get(주소, ()={} ), send('글자')
+
+  -2) 누군가가 localhost:3000/pet으로 방문하면,
+  -3) 안내문 띄우기
+
+  -4) get안의 파라미터 eng이름 : (request, response) (req,res) 주로 사용함
+
+  브라우저 켜서 localhost:3000/pet  접속하면 펫용품 사라는 안내문이 뜨죠?
+*/
+
+
 
 
 
 // 🍀route : get, post, put, delete
 
 // 🍀get
+// 사용자가 / 경로로 접속시 (/ 하나만 있으면 홈페이지입니다)
 app.get("/", function (req요청, res응답) {
+  
+  //🍉 send()
   //res.send('ig node server')
   
-  // html
+  // 🍉html
   // res.sendFile(__dirname + "/index.html");
 
   //🦄c50. ejs : html과 달리 render(~) 라는거 헷갈리지 말기
@@ -83,9 +260,58 @@ app.get("/", function (req요청, res응답) {
 
 });
 
+
+// 🦄🦄c20 html파일전송하기,.sendFile(~), Nodemon, 설치오류해결 powershell관리자모드
+console.log('🦄🦄🦄🦄c20')
+
+/* 
+  1) nodemon 설치
+
+  1-2)
+  npm install -g nodemon
+  yarn add global nodemon 
+
+  1-4) nodemon server.js
+  이제 서버를 실행할 때 nodemon server.js 라고 입력해주시면 되겠습니다.
+  파일 저장할 때 마다 이제 지가 알아서 서버를 새로 시작해줍니다.
+  (하지만 브라우저에서 새로고침은 하셔야합니다.)
+
+  1-5)에러난때 powershell관리자모드 실행 👉 set-executionpolicy unrestricted
+*/
+
+/* 
+  2) 사용자가 / 경로로 접속시 (/ 하나만 있으면 홈페이지입니다)
+
+  4) server.js랑 같은 경로에 있는 /index.html 이라는 파일을 보내줍니다. 
+
+  4-2) sendFile() 함수를 쓰면 파일을 보낼 수 있습니다
+
+  4-4) __dirname은 현재 파일의 경로를 뜻합니다. 
+*/
+
+// 🍉sendFile()
+/* 
+  app.get('/', function(req요청, res응답) {               //2)
+    res응답.sendFile(__dirname + '/index.html')       //4)
+  })   
+*/
+
+
+// 6) css 적용하기 (me...구글검색) ⚡
+
 app.get("/style.css", function (req, res) {
   res.sendFile(__dirname + "/style.css");
 });
+
+
+// 🦄🦄c24 POST요청 app.post('/add',(res,req)=>{}), body-parser(POST요청으로 서버에 데이터 전송 쉽게해주는 라이브러리 : body-parser, form, input, name)
+// 👉write.html
+console.log('🦄🦄🦄🦄c9')
+
+
+/*  2) arrow function 사용 가능
+2-1) /write접속..
+2-2) write.html보내줌  */
 
 app.get("/write", function (req, res) {
     //res.send('ig node server')
@@ -95,26 +321,105 @@ app.get("/write", function (req, res) {
 });
 
 
+/* 4)
+  😄알고리즘 pseudo-coding
+  -1. 👉write.html   👉      <form action="/add" method="POST">  코딩  , 서버에서 input 구분하기 위해 name태그 넣음
+  -2. 어떤 사람이 /add 경로(html에 지정한 action="")로 , POST요청 하면, 
+  -3. ??을 해주세요 */
 
-  
 
-    
+  /* 5)form 데이터를 서버로 전송하기 
+  - body-parser 설치 
+  : POST요청으로 서버에 데이터 전송 쉽게해주는 라이브러리 : body-parser, form, input, name
+  ( http://expressjs.com/en/resources/middleware/body-parser.html )
+
+  5-2)
+  4)까지만 해도 데이터가 잘 전송되긴 하는데, (전송된 데이터는 'req요청'파라미터에 저장됨)
+
+  전송된 데이터 사용하기 : body-parser라는 라이브러리가 있어야, 여러분이 보낸 데이터들 처리가 쉽게 가능함.
+
+  터미널을 켜서 npm install body-parser 혹은 yarn add body-parser를 하도록 합시다. 
+
+  👉server.js 상단에 추가
+  const bodyParser= require('body-parser')
+  app.use(bodyParser.urlencoded({extended: true})) 
+
+
+  5-4)
+  input작성 후 submit click한때 ( 누군가가 /add 경로로 post 요청을 할 때 ) , 터미널 콘솔창에 요청.body가 출력됨
+
+  요청.body는 여러분이 폼에 입력한 데이터가 들어가 있음.  
+ */
+
+// post() , req요청.body.ig_title
+/* 
+  app.post('/add',function(req요청,res응답){    //4-2)
+
+    res응답.send('c24 전송완료했어용')                       //4-3)
+      
+    console.log(req요청.body)          //5-4)
+    console.log(req요청.body.ig_title)          //5-4)
+    console.log(req요청.body.ig_data)          //5-4)
+
+    //  DB에 저장하기 👉 다음시간에....
+  })
+*/  
 
 
 
+// 🦄🦄c28. mongoDB 셋팅, MongoClient.connect(url, function(err, client) {~~} 
+// 👆server.js 상단에 코드 추가
+/* 
+  2) 구글에 MongoDB Atlas 검색 , 가입
 
-// 🦄🦄c28 
+  4) mongodb  라이브러리 설치
+     npm install mongodb  
 
+  8) <●mongoDB - cluster - application code>복사해놓음
+  (~~~~://디비계정아이디:디비계정패스워드~~~/데이터베이스이름~~~~) 
+
+  mongodb+srv://iikim2511:1234qwer@cluster0.o0asn.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+  8-2) mongoDB연결되면, 
+  8-4) 이 서버 연결해주셉
+*/
+
+// 🦄🦄c30 Database에 자료 저장하기, client.db('작명').collection('작명').insertOne(자료오브젝트, 콜백함수)
+//👉상단배치 const MongoClient = require('mongodb').MongoClient;
+
+console.log('🦄🦄c30')
+
+/* 
+  1) mongoDB 사이트 
+  clusters ->collection -> database는 하나의 폴더, collection은 하나의 엑셀파일이라고 생각하면 딱 맞습니다. 
+
+  2)🍀😎uri : iikim2522:dRT2GRSjF5PoHsam : 비밀번호 랜덤생성했을때 접속성공함 ,
+  🍉auto generate password 
+   home 👉 Projects 👉 Security 👉Quickstart에서 username edit선택하고 auto generate password 클릭 (가끔 quick start안나올때 있는데, home에서부터 넘어오면 생김 )
+  https://cloud.mongodb.com/v2/62be0862fda87151be53eb94#setup/access
+  비밀파일에 숨겨야함. 해킹될수있음, 연습때는 연습끝날때마다 비밀번호 새로 생성
+*/
+
+
+
+// url, password
 let url = process.env.mongoDB_url;
 
-MongoClient.connect(url, function(err, client) {
-  if (err) throw err;
-  console.log("ig-Database created!");
+MongoClient.connect(url, function(mongo_err, client) {
+  if (mongo_err) throw mongo_err;
+  console.log((`ig-Database created!`).bgBrightMagenta)
 
   let db = client.db('db0921')
 
-  // 🍀post, bodyParser
+  // 🦄🦄c32 npm ejs 1, ejs 파일 만들기
   // 👉write.ejs
+  /* 
+    🦄 누군가 /add 경로로 POST 요청을 하면, 폼에 입력된 자료를 2개가 서버로 도착합니다.
+      이 때 자료 2개를 ~~라는 이름의 collection에 저장하기
+  */
+
+  // 🍀post, bodyParser
+  //  post()를 통한 insetOne()실행, send(), req.body.ig_title
   app.post('/add',function (req,res) {    
     // res.send('/add, 전송완료')
     // res.sendFile(__dirname + "/write.html");
@@ -127,15 +432,68 @@ MongoClient.connect(url, function(err, client) {
     console.log(req.body.ig_title)
 
 
-    // 🍀c38.findOne, total count
-    db.collection('counter').findOne({name:'total post count'},function (err,pp_res) {
+    // 🦄🦄c38 게시물마다 id넣기, auto increment문법, findOne(.), insertOne(.)
+    /*    
+      2) ex)그냥 단순하게 "id:총게시물갯수+1"하면 2번째 자료(id:2)를 지우고, 새로운 데이터를 넣었을때 id:2가 되는 상황이 발생함
+      이렇게 되면 안됨, 
+      지우고 새로운거 넣어도 id:2는 공백이 되어야 함
+      
+      4) find() : 모든 데이터 찾고싶을때
+      findOne() : 원하는 데이터 1개만 찾고싶을때  
+
+      findOne({~},function(){}) : {~}가 있는 오브젝트 뭉치를 찾아줌, 그 오브젝트 안의 데이터들을 수정할 예정
+      
+      ~~collection(~)~~.findOne({~~{}~~},function(){
+        ~~~~ 수정할 코드~~~
+      })
+
+
+      🍄6) /add로 post요청하면, 
+      DB의 총게시물갯수 데이터 가져오셉
+      
+      🍄8) 새로운 collecton 만듬
+      -> 여기에 자료갯수를 저장해서 꺼냈는 방식을 사용할 예정
+      default로 데이터 만들어두고, 게시물 만들어질때마다 totalPost숫자 늘리는 방식을 사용할 예정
+    */
+
+    // 🍀c38.findOne, total count    
+    // .collecton(~) : ....'~' 에 연결, collecton이름 여기에 작명하면, mongoDB에 자동으로 그 collecton 만들어짐
+    db.collection('counter').findOne({name:'total post count'},function (p_err,pp_res) {
       console.log(pp_res)
       console.log(pp_res.totalPost)
       
-        // 🍀insertOne, _id: pp_res.totalPost+1
+      // 🍀insertOne, _id: pp_res.totalPost+1
+      // .insertOne(~) : .insertOne(저장할 데이터, 그 이후 실행할 콜백함수)  👉 mongoDB에 가면 저장된 데이터 확인됨
       db.collection('co0921').insertOne({_id:pp_res.totalPost+1,title: req.body.ig_title, date:req.body.ig_data },function (){
         console.log('insertone success'.blue)      
 
+
+                
+        // 🦄🦄c40 게시물마다 id넣기2 - id에 +1하기, updateOne(.), mongodb operator $inc $set 
+        console.log('🦄🦄c40')  
+        /*
+          10) updateOne({},{},function(){}) : 하나의 데이터 수정
+          updateMany() : 한번에 많은 데이터 수정
+
+          20-10) post()할때, 
+          findOne() :  collection('~~')에서 name:'게시물갯수'데이터를 가지고있는 오브젝트 전체를 가져옴 (ex: collection(counter)의 오브젝트)
+          collection("~~")에 insertOne : collection("~~")에  그 db결과의 totalPost에 +1을 해서 _id만듬
+
+          20-20) post()할 때 + collection('~~') 에 insertOne할때 : 
+          updateOne() : collection('~~')에서 " name:게시물갯수"데이터를 가진 오브젝트 전체를 가져옴. 
+          그안의 데이터 하나(ex: totalPost) 를 수정함 (ex: totalPost+1)
+
+          30) $inc : number data에 +, - 시킴
+          양수, 음수 둘다 가능함
+          +1 : +1 해줌
+          -1 : -1 해줌
+
+
+          30-2) mongodb update operators : 
+          https://www.mongodb.com/docs/manual/reference/operator/update/
+        */
+
+        // 🦄🦄 40 게시물마다 id넣기2 - id에 +1하기, updateOne(.), mongodb operator $inc $set 
         // 🍀c40.updateOne, $inc:{totalPost:1}
         db.collection('counter').updateOne({name:'total post count'},{$inc:{totalPost:1}},function (PPP_err,ppp_res) {
           if (PPP_err) {
@@ -146,17 +504,40 @@ MongoClient.connect(url, function(err, client) {
       })
     });
   })
-  
+
+  //🦄🦄c34 HTML에 DB데이터 넣는 법 2 (DB데이터 읽기), .find(.).toArray(에러,결과)={}), { posts  결과 }
+  // 👉list.ejs
+
+  /* list.ejs 파일안 코딩
+        <!-- 🦄c34 반복문     <%  %>   
+            for (let i = 0; i < array.length; i++) {
+                array[i];              
+            }        
+        -->
+        
+        <%    for (let i = 0; i < ig_posts.length; i++) {   %>  
+          <h4>할일 제목 : <%= ig_posts[i].제목 %></h4>
+          <p>할일 마감날짜 : <%= ig_posts[i].날짜 %></p>          
+        <%  }  %>        
+  */    
+  /*
+      2).find().toArray() 라고 적으시면 collection(‘post’)에 있는 모든 데이터를 Array 자료형으로 가져옵니다. 
+
+      4)list.ejs 파일을 렌더링함과 동시에 {ig_posts: 결과} 라는 데이터를 함께 보내줄 수 있습니다. 
+      (정확히 말하면 결과라는 데이터를 ig_posts 라는 이름으로 ejs 파일에 보내주세요~ 입니다)
+  */
+
+      
   // 🍀c34. list
   app.get("/list", function (req, res) {
 
     // find().toArray()
-    db.collection('co0921').find().toArray(function (err,pp_res) {
-      console.log(pp_res)
+    db.collection('co0921').find().toArray(function (err,p_db결과) {
+      console.log(p_db결과)
       
       // ejs
       //res.render
-      res.render('list.ejs',{ig_posts:pp_res});
+      res.render('list.ejs',{ig_posts:p_db결과});
     })
 
   });
@@ -176,35 +557,114 @@ MongoClient.connect(url, function(err, client) {
   });
 
 
+  // 🦄🦄c42 AJAX로 DELETE 요청하기1, $.ajax(.), app.delete('delete',(.)={})
+  // 🦄🦄c44 AJAX로 DELETE 요청하기2, deleteOne(.), data-~~, .dataset.~~, parseInt(.)
+  // 🦄🦄c46 AJAX로 DELETE 요청하기3, jQuery기능 .status(~).send(~)
+  console.log('🦄🦄c42,44,46')
 
-
+  //c44) 🍄req요청.body에 담겨온 id를 가진 오브젝트를 db에서 찾아서, 삭제
+  // 👉./views/list.ejs
 
   // 🍀c42, delete
   app.delete('/delete', function (req,res) {
     
+    console.log(`delete`.bgBrightMagenta)
     console.log(req.body)
 
+    /*🍀
+      "req요청.body.~id"를 number로 바꿈  -> "req요청.body"를 deleteOne()에 사용함. 
+      ("req요청.body._id"  가 아니라. "req요청.body") 
+    */
     req.body._id = parseInt(req.body._id);
+
+    // ~.deleteOne()
     db.collection('co0921').deleteOne(req.body, function (pp_err, pp_res) {
          console.log('ig delete fin')
 
+      // c46-30) 성공코드 200:  res응답.status(200).send({message : "c46, success"});  
+      // 👉 list.ejs
       res.status(200).send({message:"ig delete fail"});
+
+      // c46-40) 실패코드 400:  res응답.status(400).send({message : "c46, fail"});        
+      // res응답.status(400).send({message : "c46, fail"});
     })
     
   });
 
 
+  // 🦄🦄c48 상세페이지를 만들어보자 id (URL parameter), req요청.params.id
+  // 👉/views/detail.ejs
+  
+  /* 
+    🍀목표: /detail로 접속하면 detail.ejs 보여주기 
 
-  // 🍀c48. 👉/views/detail.ejs
+    -2) :id : URL parameter
+    = req요청.params.id  = 'detail/:id'
 
+    -4)findOne({~},function(){}) : {~}가 있는 오브젝트 뭉치를 찾아줌
+
+    -6) parseInt() :  db의 id는 int인데, 코드를 확인하면 string으로 나옴 -> parseInt()붙여서 number로 만듬
+    팁: 마우스를 hover하면 JavaScript type을 알려줌
+
+    -8).render('~c~',{ ~b~ : ~a~ }) : ~a~데이터를, ~b~이름으로,  ~c~~로 보냄,
+  */
+  // :id
   app.get('/detail/:id',function (req,res) {
+
+    //  req요청.params.id 
+    // findOne({~},function(){})
+    // parseInt 
     db.collection('co0921').findOne({_id: parseInt(req.params.id)},function (pp_err,p_res) {
       console.log(p_res)
+
+      // .render('~c~',{ ~b~ : ~a~ })
       res.render('detail.ejs',{ig_data: p_res})      
     });    
   });
 
-  // 🦄🦄c52. update.ejs, update-id.ejs
+
+
+  // 🦄🦄c50 ejs include 문법(= react components), static파일, express.static('public') 
+  // 👉상단코드) app.use('.public', express.static('pulbic'));
+  //  👉 ./views/nav.html 
+  // 👉./views/~~~.ejs
+
+  /* 
+    2)
+    👉./public/style.css 만들기
+
+      static files는 public폴더안에 보관하는게 관습
+      CSS파일이 여기에 해당됨
+      (static files : 데이터에 의해 변하지 않는 파일) 
+
+    4) 👉상단코드) app.use('.public', express.static('pulbic'));
+    static 파일 보관위해 public폴더 쓸거라는 뜻
+
+    6) 👉 ./views/nav.html 만들기
+
+      공유할 html 파일 : 
+      views폴더
+      html형식  (ejs X)
+      
+      적용은 ~.ejs파일에만 적용가능함
+  
+    8)👉./views/~~~.ejs에 삽입하기
+
+      여기 이자리에 nav_c50.html을 넣을수있음
+      <%- include('nav_c50.html') %>  
+
+    10)
+      👉./views/index.ejs 파일변경, 폴더이동.. 
+      👉./views/write.ejs 파일변경, 폴더이동.. 
+  
+    app.listen(3000, function(){
+        console.log('c30 listening on 3000')
+      });
+  */
+
+
+  // 🦄🦄c52 글 수정 =PUT=update, html에서 PUT요청하기, method-override 
+  // 👉update.ejs, update-id.ejs
   /* 
     1 'update' - 'update-id'페이지 따로만듬
     2. app.get()도 따로 만듬
@@ -238,11 +698,6 @@ MongoClient.connect(url, function(err, client) {
       res.redirect('/list');
     })
   });
-
-
-  // 🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
-  // 🦄🦄🦄🦄🦄🦄🦄🦄여기부터 필기노트 옮김🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
-  console.log('🦄🦄여기부터 필기노트 옮김')
 
 
   // 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
@@ -811,14 +1266,14 @@ MongoClient.connect(url, function(err, client) {
 
 
 
-    // 🍀listen
+    // 👉🍀c18, listen
     app.listen(process.env.PORT, function () {
         console.log((`bgBrightMagenta`).bgBrightMagenta)
         console.log(`ig node server gogo, port: ${process.env.PORT}`.rainbow);
         
     });
 
-    // cliend.close()있으면 post가 안됨..왜인지는 모름
+    //🍀 client.close()있으면 post가 안됨..왜인지는 모름
     // client.close();
 });
 

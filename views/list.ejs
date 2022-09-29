@@ -73,17 +73,31 @@
 <script>
 
   // 🦄c41
+  // 🍀44-40) 버튼클릭 & 실행  👉html
     $('.delete').click((e)=>{           
 
-        // 🍀44
+      // 🍀46-20) this : 지금 클릭한 것
+      let thisClicked= $(this);
+
+        // 🍀44. ajax요청시, /delete서버에 {_id:1}정보 보내줌
         $.ajax({
           method: "DELETE",
           url: "/delete",
+          // data: { _id : 7}      //👉server.js , req.body
+
+          //🍀44-50. e.target.dataset.id : 클릭한 버튼에 숨겨진 data-id값 가져오기
           data: {_id: e.target.dataset.id}
           
-        }).done(function() {
-          
-          $(this).parent('div').fadeOut();
+        }).done(function() {            //🥒c46-30)
+                    
+          /* 
+            46)
+            w1 : page 강제 새로고침   -->  location.reload()
+            w2 : 삭제버튼 클릭한 div를 제거 or 안보이게함          
+          */
+
+          // 46-20).parent('div').fadeOut();
+          thisClicked.parent('div').fadeOut();
           location.reload();
         
           console.log('ig delete success - list.js')
