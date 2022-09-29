@@ -917,7 +917,7 @@ MongoClient.connect(url, function(mongo_err, client) {
       console.log(colors.bgBrightMagenta('get./search_c70'))
       console.log(req요청.query.value)
 
-      //  🍀70-15) .find(검색조건).toArray()
+      //  🍀70-15) .find(검색조건pipeline).toArray()
       // 👉mongoDB사이트  collection 👉 index
       // {title:req요청.query.value} : full scan하는 이전 방법      
       /*      
@@ -938,7 +938,7 @@ MongoClient.connect(url, function(mongo_err, client) {
 
 
       
-      //  🍀70-20) .aggregate(검색조건).toArray()  
+      //  🍀70-20) .aggregate(검색조건pipeline).toArray()  
       // 👉 mongoDB사이트...search index탭 활용함      
       /* 
         🍀70-30)
@@ -961,7 +961,7 @@ MongoClient.connect(url, function(mongo_err, client) {
           검색결과필터링으로 넣어줌      
       */
 
-      let 검색조건 =[
+      let 검색조건pipeline =[
         {
           $search:{
             index : "ig_titleSearch",
@@ -976,7 +976,7 @@ MongoClient.connect(url, function(mongo_err, client) {
         {$limit : 10},
         {$project : {title : 1, date:1, _id: 0, score :{$meta : "searchScore"}}}
       ];
-      db.collection('co0921').aggregate(검색조건).toArray((err,p_db결과)=>{
+      db.collection('co0921').aggregate(검색조건pipeline).toArray((err,p_db결과)=>{
         console.log(p_db결과)  
   
         res응답.render('search_c70.ejs',{ig_posts:p_db결과});
