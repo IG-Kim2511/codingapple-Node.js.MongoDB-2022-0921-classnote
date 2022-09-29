@@ -622,7 +622,49 @@ MongoClient.connect(url, function(mongo_err, client) {
     });    
   });
 
-  // 🦄🦄c52. update.ejs, update-id.ejs
+
+
+  // 🦄🦄c50 ejs include 문법(= react components), static파일, express.static('public') 
+  // 👉상단코드) app.use('.public', express.static('pulbic'));
+  //  👉 ./views/nav.html 
+  // 👉./views/~~~.ejs
+
+  /* 
+    2)
+    👉./public/style.css 만들기
+
+      static files는 public폴더안에 보관하는게 관습
+      CSS파일이 여기에 해당됨
+      (static files : 데이터에 의해 변하지 않는 파일) 
+
+    4) 👉상단코드) app.use('.public', express.static('pulbic'));
+    static 파일 보관위해 public폴더 쓸거라는 뜻
+
+    6) 👉 ./views/nav.html 만들기
+
+      공유할 html 파일 : 
+      views폴더
+      html형식  (ejs X)
+      
+      적용은 ~.ejs파일에만 적용가능함
+  
+    8)👉./views/~~~.ejs에 삽입하기
+
+      여기 이자리에 nav_c50.html을 넣을수있음
+      <%- include('nav_c50.html') %>  
+
+    10)
+      👉./views/index.ejs 파일변경, 폴더이동.. 
+      👉./views/write.ejs 파일변경, 폴더이동.. 
+  
+    app.listen(3000, function(){
+        console.log('c30 listening on 3000')
+      });
+  */
+
+
+  // 🦄🦄c52 글 수정 =PUT=update, html에서 PUT요청하기, method-override 
+  // 👉update.ejs, update-id.ejs
   /* 
     1 'update' - 'update-id'페이지 따로만듬
     2. app.get()도 따로 만듬
@@ -656,11 +698,6 @@ MongoClient.connect(url, function(mongo_err, client) {
       res.redirect('/list');
     })
   });
-
-
-  // 🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
-  // 🦄🦄🦄🦄🦄🦄🦄🦄여기부터 필기노트 옮김🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
-  console.log('🦄🦄여기부터 필기노트 옮김')
 
 
   // 🦄🦄c56 (회원 로그인0) 세션, JWT, OAuth 등 회원인증 방법 이해하기
