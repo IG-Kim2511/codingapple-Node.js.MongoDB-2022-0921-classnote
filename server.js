@@ -11,6 +11,10 @@
 
   node server.js
   nodemon server.js 
+
+  🍀Google cloud 명령어
+    gcloud init
+    gcloud app deploy
 */
 /* 
   🦄🦄🦄자주쓰는 node.js, mongoDB 문법,
@@ -47,10 +51,6 @@
   .find({title:req.query.value}).toArray((err,db결과)=>{ })
 
 
-
-  🍀Google cloud 명령어
-    gcloud init
-    gcloud app deploy
 
 */
 
